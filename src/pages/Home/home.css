@@ -2,80 +2,47 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 20px;
 }
 
-.hero {
-    width: 100%;
-    height: 60vh; /* Adjusted for better mobile view */
-    overflow: hidden;
-}
-
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.gallery {
-    width: 90%;
-    max-width: 1200px;
-    margin: 32px 0;
-}
-
-.gallery h2 {
-    margin-bottom: 16px;
-    text-align: center;
-}
-
-.gallery-grid {
+.hero-section {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-footer {
     width: 100%;
-    background: #333;
-    color: white;
-    padding: 16px 0;
-    text-align: center;
+    max-width: 1200px;
+    height: 500px;
 }
 
-footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.hero-image {
+    flex: 1;
+    background: url('../../../build/logo192.png') no-repeat center center/cover;
+    aspect-ratio: 4/3;
+}
+
+.hero-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
 }
 
-footer ul li {
-    margin: 8px 0;
+.hero-box {
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-footer ul li a {
-    color: white;
-    text-decoration: none;
+.hero-box h2 {
+    margin: 0 0 20px 0;
 }
 
-footer ul li a:hover {
-    text-decoration: underline;
+.hero-images {
+    display: flex;
+    justify-content: space-between;
 }
 
-/* Responsive styles */
-@media (min-width: 600px) {
-    .gallery-grid {
-        justify-content: space-between;
-    }
-
-    footer ul {
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    footer ul li {
-        margin: 0 16px;
-    }
+.hero-images img {
+    width: 30%;
+    border-radius: 10px;
 }

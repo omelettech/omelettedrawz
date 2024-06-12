@@ -1,50 +1,24 @@
 import React from 'react';
-import Card from "../../components/Card/card";
+import speech_bubble from "../../components/Speech_bubble/speech_bubble";
+import './home.css';
 
 const Home = () => {
-    const recentArtworks = [
-        {
-            image: 'https://via.placeholder.com/300',
-            title: 'Artwork 1',
-            description: 'Description of artwork 1',
-        },
-        {
-            image: 'https://via.placeholder.com/300',
-            title: 'Artwork 2',
-            description: 'Description of artwork 2',
-        },
-        {
-            image: 'https://via.placeholder.com/300',
-            title: 'Artwork 3',
-            description: 'Description of artwork 3',
-        },
-    ];
-
     return (
         <div className="home">
-            <div className="hero">
-                <img src="https://via.placeholder.com/1920x1080" alt="Hero" />
-            </div>
-            <div className="gallery">
-                <h2>Gallery</h2>
-                <div className="gallery-grid">
-                    {recentArtworks.map((artwork, index) => (
-                        <Card
-                            key={index}
-                            image={artwork.image}
-                            title={artwork.title}
-                            description={artwork.description}
-                        />
-                    ))}
+            <div className="hero-section">
+                <div className="hero-image"></div>
+                <div className="hero-content">
+                    <speech_bubble text="Welcome to our site!" />
+                    <div className="hero-box">
+                        <h2>Our Services</h2>
+                        <div className="hero-images">
+                            <img src="" alt="Service 1" />
+                            <img src="" alt="Service 2" />
+                            <img src="" alt="Service 3" />
+                        </div>
+                    </div>
                 </div>
             </div>
-            <footer>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/src/pages/gallery">Gallery</a></li>
-                    <li><a href="/src/pages/about">About</a></li>
-                </ul>
-            </footer>
         </div>
     );
 };
