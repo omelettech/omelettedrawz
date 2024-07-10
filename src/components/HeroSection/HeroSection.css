@@ -1,0 +1,65 @@
+/* Hero Section Styles */
+#hero-section {
+  width: 100vw;
+  height: calc(100vh - 160px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 160px;
+}
+
+#head-line {
+  width: 520px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 90px;
+  position: relative;
+}
+
+#head-line:before {
+  content: "";
+  width: 360px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 90px;
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#head-line:after {
+  content: "";
+  width: 200px;
+  height: 30px;
+  background: var(--accent);
+  border-radius: 90px;
+  position: absolute;
+  bottom: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Section Styles */
+section {
+  width: 100vw;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+}
+
+section:nth-child(odd) {
+  background: var(--primary-color);
+}
+
+section:nth-child(even) {
+  background: var(--primary-color);
+}
+
+#heading {
+  width: 120px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 90px;
+  margin-top: 40px;
+}

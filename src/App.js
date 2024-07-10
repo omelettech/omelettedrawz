@@ -11,7 +11,7 @@ import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import {AuthContext, AuthProvider} from "./context/AuthContext";
 import {useContext} from "react";
-
+import './tailwind.css'
 function App() {
     const currentUser= useContext(AuthContext)
 

@@ -1,38 +1,28 @@
-import React, {useContext} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
-import './navbar.css';
-import {AuthContext} from "../../context/AuthContext";
-
-import {auth} from '../../config/firebase'
+import React from "react";
+import { Link } from "react-router-dom";
+import 'tailwindcss/tailwind.css';
 
 const Navbar = () => {
-    const navigate=useNavigate()
-    const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      navigate('/login')
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-    const currentUser = useContext(AuthContext)
-    return (
-        <nav className="navbar">
-            <div className="navbar-logo">
-                <Link to="/">Logo</Link>
-            </div>
-            <ul className="navbar-links">
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/shop">Shop</Link></li>
-                <li><Link to="/gallery">Gallery</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
-                <li><Link to="/register">Register</Link></li>
-                {currentUser && <li>{currentUser.email}</li>}
-                {currentUser && <li><btn onClick={handleLogout}>Logout</btn></li>}
-
-            </ul>
-        </nav>
-    );
+  return (
+    <div className="navbar bg-base-100 shadow-lg">
+      <div className="navbar-start">
+        <a className="btn btn-ghost normal-case text-xl" href="/">
+          Brand
+        </a>
+      </div>
+      <div className="navbar-center lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/shop">Shop</Link></li>
+          <li><Link to="/gallery">Gallery</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+        </ul>
+      </div>
+      <div className="navbar-end">
+        <Link to="/signin" className="btn btn-primary">Sign In</Link>
+      </div>
+    </div>
+  );
 };
 
 export default Navbar;
