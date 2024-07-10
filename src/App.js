@@ -9,10 +9,11 @@ import Shop from "./pages/Shop/Shop";
 import Contact from "./pages/Contact/Contact";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
+import {AuthProvider} from "./context/AuthContext";
 
 function App() {
     return (
-        <div>
+        <AuthProvider>
             <Router>
                 <Navbar/>
                 <Routes>
@@ -27,7 +28,7 @@ function App() {
                 </Routes>
             </Router>
 
-        </div>
+        </AuthProvider>
     );
 }
 
