@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import speech_bubble from "../../components/Speech_bubble/speech_bubble";
 import './Home.css';
+import {AuthContext} from "../../context/AuthContext";
 
 const Home = () => {
     return (

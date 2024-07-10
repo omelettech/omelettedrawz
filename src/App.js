@@ -9,10 +9,14 @@ import Shop from "./pages/Shop/Shop";
 import Contact from "./pages/Contact/Contact";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
-import {AuthProvider} from "./context/AuthContext";
+import {AuthContext, AuthProvider} from "./context/AuthContext";
+import {useContext} from "react";
 
 function App() {
+    const currentUser= useContext(AuthContext)
+
     return (
+
         <AuthProvider>
             <Router>
                 <Navbar/>

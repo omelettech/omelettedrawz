@@ -9,12 +9,11 @@ function Register() {
       const [password, setPassword] = useState('');
       const [username, setUsername] = useState('');
       const [error, setError] = useState('');
-      const auth = getAuth()
     const handleRegistration = async (e) => {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      console.log("SUCCESS")
+
     } catch (err) {
       setError(err.message);
     }
