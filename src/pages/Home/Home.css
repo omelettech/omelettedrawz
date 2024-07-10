@@ -1,0 +1,48 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.hero-section {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 500px;
+}
+
+.hero-image {
+    flex: 1;
+    background: url('../../../build/logo192.png') no-repeat center center/cover;
+    aspect-ratio: 4/3;
+}
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.hero-box {
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.hero-box h2 {
+    margin: 0 0 20px 0;
+}
+
+.hero-images {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hero-images img {
+    width: 30%;
+    border-radius: 10px;
+}
