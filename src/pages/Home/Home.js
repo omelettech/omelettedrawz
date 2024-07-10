@@ -1,6 +1,6 @@
 import React from 'react';
 import speech_bubble from "../../components/Speech_bubble/speech_bubble";
-import './home.css';
+import './Home.css';
 
 const Home = () => {
     return (
