@@ -1,27 +1,35 @@
 import React, {useContext} from 'react';
 import speech_bubble from "../../components/Speech_bubble/speech_bubble";
-import './Home.css';
 import {AuthContext} from "../../context/AuthContext";
 
 const Home = () => {
+    const {currentUser} = useContext(AuthContext)
+    if(currentUser){
     return (
-        <div className="home">
-            <div className="hero-section">
-                <div className="hero-image"></div>
-                <div className="hero-content">
-                    <speech_bubble text="Welcome to our site!" />
-                    <div className="hero-box">
-                        <h2>Our Services</h2>
-                        <div className="hero-images">
-                            <img src="" alt="Service 1" />
-                            <img src="" alt="Service 2" />
-                            <img src="" alt="Service 3" />
-                        </div>
-                    </div>
+        <div
+            className="hero min-h-screen"
+            style={{
+                backgroundImage: "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
+            }}>
+            <div className="hero-overlay bg-opacity-60"></div>
+            <div className="hero-content text-neutral-content text-center">
+                <div className="max-w-md">
+                    <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
+                    <p className="mb-5">
+                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+                        quasi. In deleniti eaque aut repudiandae et a id nisi.
+                    </p>
+                    <button className="btn btn-primary">Get Started</button>
                 </div>
             </div>
         </div>
     );
+    }
+    else{
+        return (
+            <div>log in</div>
+        )
+    }
 };
 
 export default Home;
