@@ -1,0 +1,20 @@
+:root {
+  --primary-color: #673AB7;
+  --text-color: #333;
+}
+
+.gallery-container {
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.gallery-title {
+  text-align: center;
+  color: var(--primary-color);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
