@@ -1,20 +1,36 @@
 :root {
-  --primary-color: #673AB7;
-  --text-color: #333;
+  --gallery-spacing: 10px; /* Adjust spacing between images */
+  --gallery-bg: #fff;
 }
 
-.gallery-container {
-  padding: 20px;
-  background-color: #f9f9f9;
+body[data-theme="dark"] {
+  --gallery-bg: #333;
 }
 
-.gallery-title {
-  text-align: center;
-  color: var(--primary-color);
+body[data-theme="light"] {
+  --gallery-bg: #fff;
 }
 
-.gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+.grid-container{
+
+  justify-items: center;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensure padding and border are included in the element’s total width and height */
+}
+
+.gallery-item{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
 }

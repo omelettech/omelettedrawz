@@ -1,48 +1,36 @@
-.home {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+.hero-container {
+  background-image: url('your-image-url.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
 }
 
-.hero-section {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    height: 500px;
+.hero-content h1 {
+  font-size: 4rem;
+  margin-bottom: 20px;
 }
 
-.hero-image {
-    flex: 1;
-    background: url('../../../build/logo192.png') no-repeat center center/cover;
-    aspect-ratio: 4/3;
+.hero-content p {
+  font-size: 1.5rem;
+  margin-bottom: 40px;
 }
 
-.hero-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 20px;
+.hero-button {
+  background-color: #007bff;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.hero-box {
-    background-color: var(--background-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.hero-box h2 {
-    margin: 0 0 20px 0;
-}
-
-.hero-images {
-    display: flex;
-    justify-content: space-between;
-}
-
-.hero-images img {
-    width: 30%;
-    border-radius: 10px;
+.hero-button:hover {
+  background-color: #0056b3;
 }

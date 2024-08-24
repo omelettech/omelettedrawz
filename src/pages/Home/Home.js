@@ -1,31 +1,21 @@
 import React, {useContext} from 'react';
 import speech_bubble from "../../components/Speech_bubble/speech_bubble";
 import {AuthContext} from "../../context/AuthContext";
+import bg from '../../assets/images/image1.png'
 
 const Home = () => {
     const {currentUser} = useContext(AuthContext)
-    if(currentUser){
-    return (
-        <div
-            className="hero min-h-screen"
-            style={{
-                backgroundImage: "url(https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg)",
-            }}>
-            <div className="hero-overlay bg-opacity-60"></div>
-            <div className="hero-content text-neutral-content text-center">
-                <div className="max-w-md">
-                    <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-                    <p className="mb-5">
-                        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                        quasi. In deleniti eaque aut repudiandae et a id nisi.
-                    </p>
-                    <button className="btn btn-primary">Get Started</button>
+    if (currentUser) {
+        return (
+            <div className="hero-container">
+                <div className="hero-content">
+                    <h1>Welcome to Our Website</h1>
+                    <p>Your journey to excellence starts here.</p>
+                    <button className="hero-button">Get Started</button>
                 </div>
             </div>
-        </div>
-    );
-    }
-    else{
+        );
+    } else {
         return (
             <div>log in</div>
         )

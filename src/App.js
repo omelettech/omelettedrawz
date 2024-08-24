@@ -2,24 +2,27 @@ import './App.css';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Navbar from './components/navbar/navbar';
 import Home from './pages/Home/Home';
-import Gallery from './pages/Gallery/Gallery';
+import Gallery from "./pages/Gallery/Gallery";
 import About from './pages/About';
-import './styles/app_style.css';
 import Shop from "./pages/Shop/Shop";
 import Contact from "./pages/Contact/Contact";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
 import {AuthContext, AuthProvider} from "./context/AuthContext";
-import {useContext} from "react";
-import './tailwind.css'
+import {useContext, useState} from "react";
+
 function App() {
-    const currentUser= useContext(AuthContext)
+    const currentUser = useContext(AuthContext)
+    const [theme, setTheme] = useState('dark-theme');
+    const toggleTheme = () => {
+        setTheme(theme === 'light-theme' ? 'dark-theme' : 'light-theme');
+    };
 
     return (
 
         <AuthProvider>
             <Router>
-                <Navbar/>
+                <Navbar theme={theme}/>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
                     <Route path="/shop" element={<Shop/>}/>

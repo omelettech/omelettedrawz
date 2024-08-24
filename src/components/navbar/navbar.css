@@ -1,33 +1,107 @@
+:root {
+  --navbar-bg: #ffffff;
+  --navbar-text-color: #333;
+  --navbar-link-color: #4CAF50;
+  --navbar-hover-color: #388E3C;
+  --dropdown-bg: #ffffff;
+  --dropdown-text-color: #333;
+  --dropdown-hover-bg: #f0f0f0;
+}
+
+body[data-theme="dark"] {
+  --navbar-bg: #333;
+  --navbar-text-color: #f5f5f5;
+  --navbar-link-color: #90caf9;
+  --navbar-hover-color: #64b5f6;
+  --dropdown-bg: #444;
+  --dropdown-text-color: #f5f5f5;
+  --dropdown-hover-bg: #555;
+}
+
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-logo a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.5em;
-    font-weight: bold;
+.navbar a {
+  color: var(--navbar-link-color);
+  text-decoration: none;
+  font-size: 1.1rem;
 }
 
-.navbar-links {
-    list-style: none;
-    display: flex;
+.navbar a:hover {
+  color: var(--navbar-hover-color);
 }
 
-.navbar-links li {
-    margin: 0 10px;
+.navbar-menu {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
 
-.navbar-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2em;
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.navbar-links a:hover {
-    text-decoration: underline;
+.dropdown {
+  position: relative;
+}
+
+.dropdown-avatar {
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 50px;
+  background-color: var(--dropdown-bg);
+  color: var(--dropdown-text-color);
+  border-radius: 5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  width: 200px;
+  padding: 10px 0;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: var(--dropdown-hover-bg);
+}
+
+.badge {
+  background-color: var(--navbar-link-color);
+  color: #fff;
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  margin-left: 5px;
 }
