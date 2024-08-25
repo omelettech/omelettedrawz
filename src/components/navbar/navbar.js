@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {auth} from "../../config/firebase";
 import {AuthContext} from "../../context/AuthContext";
-import ThemeSwitcher from '../ThemeSwitcher';
+import ThemeSwitcher from '../ThemeSwitcher/ThemeSwitcher';
 import './navbar.css';
 
 const Navbar = ({theme }) => {
@@ -29,12 +29,13 @@ const Navbar = ({theme }) => {
           <li><Link to="/shop">Shop</Link></li>
           <li><Link to="/gallery">Gallery</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-            <ThemeSwitcher />
         </ul>
       </div>
 
 
       <div className="dropdown">
+                      <ThemeSwitcher />
+
         <div className="dropdown-avatar">
           <img
             alt="Profile"

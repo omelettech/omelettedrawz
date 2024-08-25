@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import speech_bubble from "../../components/Speech_bubble/speech_bubble";
 import {AuthContext} from "../../context/AuthContext";
 import bg from '../../assets/images/image1.png'
+import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 
 const Home = () => {
     const {currentUser} = useContext(AuthContext)
@@ -17,7 +18,7 @@ const Home = () => {
         );
     } else {
         return (
-            <div>log in</div>
+            <SectionHeading text={"Login"} align={"center"}></SectionHeading>
         )
     }
 };

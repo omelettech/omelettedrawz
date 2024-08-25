@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import "./ThemeSwitcher.css"
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState('dark');
 
@@ -14,8 +14,8 @@ const ThemeSwitcher = () => {
   }, [theme]);
 
   return (
-    <button onClick={toggleTheme}>
-      Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+    <button  className="theme-switcher" onClick={toggleTheme}>
+      {theme === 'light' ? 'Dark' : 'Light'}
     </button>
   );
 };

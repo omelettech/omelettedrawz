@@ -1,0 +1,23 @@
+.section-heading {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-heading h1,
+.section-heading h2,
+.section-heading h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.section-heading.left {
+  text-align: left;
+}
+
+.section-heading.center {
+  text-align: center;
+}
+
+.section-heading.right {
+  text-align: right;
+}

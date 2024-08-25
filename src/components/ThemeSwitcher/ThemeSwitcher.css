@@ -1,0 +1,46 @@
+:root {
+  --button-bg: #333;
+  --button-text: #fff;
+  --button-bg-hover: #555;
+  --button-text-hover: #f0f0f0;
+}
+
+[data-theme='light'] {
+  --button-bg: #f0f0f0;
+  --button-text: #333;
+  --button-bg-hover: #ccc;
+  --button-text-hover: #000;
+}
+
+[data-theme='dark'] {
+  --button-bg: #333;
+  --button-text: #fff;
+  --button-bg-hover: #555;
+  --button-text-hover: #f0f0f0;
+}
+
+
+
+
+.theme-switcher {
+  background-color: var(--button-bg);
+  border: none;
+  border-radius: 25px;
+  color: var(--button-text);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.theme-switcher:hover {
+  background-color: var(--button-bg-hover);
+  color: var(--button-text-hover);
+}
+
+.theme-switcher:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+}

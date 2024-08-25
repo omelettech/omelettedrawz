@@ -18,10 +18,9 @@ const images = [
 ]
 
 const minImgWidth = 600
-const calculateHeight=(w,h)=>{
-    return w<=minImgWidth? h : Math.round((h/(w/minImgWidth))*100)/100
+const calculateHeight = (w, h) => {
+    return w <= minImgWidth ? h : Math.round((h / (w / minImgWidth)) * 100) / 100
 }
-
 
 
 const Gallery = () => {
@@ -31,9 +30,10 @@ const Gallery = () => {
         const layoutData = images.map((img) => {
 
 
-            return {...img,
-                width:img.width<minImgWidth?img.width:minImgWidth,
-                height: calculateHeight(img.width,img.height)
+            return {
+                ...img,
+                width: img.width < minImgWidth ? img.width : minImgWidth,
+                height: calculateHeight(img.width, img.height)
             };
         });
 
@@ -45,13 +45,11 @@ const Gallery = () => {
             className="grid-container"
             minWidth={minImgWidth}
             items={layout.map((item) => (
-
-                    <img className="gallery-item" src={item.src} alt={item.alt} style={{height:item.height,width:item.width}}>
-                    </img>
-
-
+                <img className="gallery-item" src={item.src} alt={item.alt}
+                     style={{height: item.height, width: item.width}}>
+                </img>
             ))}
-            gap={5}
+            gap={10}
         ></Layout>
     );
 };

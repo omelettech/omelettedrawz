@@ -1,36 +1,35 @@
 :root {
-  --gallery-spacing: 10px; /* Adjust spacing between images */
-  --gallery-bg: #fff;
+    --gallery-spacing: 10px; /* Adjust spacing between images */
+    --gallery-bg: #fff;
 }
 
 body[data-theme="dark"] {
-  --gallery-bg: #333;
+    --gallery-bg: #333;
 }
 
 body[data-theme="light"] {
-  --gallery-bg: #fff;
+    --gallery-bg: #fff;
 }
 
-.grid-container{
-
-  justify-items: center;
+.grid-container {
+    margin-top: 20px;
+    justify-items: center;
 }
 
 .gallery-item {
-  position: relative;
-  overflow: hidden;
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  box-sizing: border-box; /* Ensure padding and border are included in the element’s total width and height */
-}
-
-.gallery-item{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding and border are included in the element’s total width and height */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
 .gallery-item:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
+    border-radius: 0;
 }
+
