@@ -6,6 +6,7 @@
 
     --font-h1: 'SuperFortress', sans-serif;
     --font-h2: 'DanielHands', sans-serif;
+    --font-h3: 'Aslam', sans-serif;
     --font-body: 'Aslam', sans-serif;
     --font-small: 'Aslam', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
@@ -31,7 +32,7 @@
 }
 
 body[data-theme='dark'] {
-    --font-h1: 'SuperFortress', sans-serif;
+    --font-h1: 'DanielHands', sans-serif;
     --font-h2: 'DanielHands', sans-serif;
     --font-body: 'Aslam', sans-serif;
     --font-small: 'Aslam', sans-serif;
@@ -60,13 +61,19 @@ h2 {
     font-weight: 600;
     line-height: 1.3;
 }
-
+h3 {
+    font-family: var(--font-h3);
+    font-size: 1.5rem;
+    line-height: 1.3;
+}
 p {
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.6;
 }
-
+button{
+    font-family: var(--font-btn);
+}
 small {
     font-family: var(--font-small);
     font-size: 0.875rem;

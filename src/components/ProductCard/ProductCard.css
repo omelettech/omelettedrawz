@@ -1,0 +1,46 @@
+/* Product Showcase */
+.product-card {
+  display: flex;
+
+  align-items: center;
+  margin: 2rem 16%;
+  background-color: var(--card-background);
+  padding: 1rem;
+  border-radius: 10px;
+  color: var(--text-color);
+}
+
+.product-card.reverse {
+  flex-direction: row-reverse;
+}
+
+.product-text {
+  flex: 1;
+  padding: 1rem;
+}
+
+.product-text h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.product-text p {
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.product-image{
+  max-width: 30%;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .product-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .product-card.reverse {
+    flex-direction: column;
+  }
+}

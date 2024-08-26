@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import './Shop.css'; // We'll add some basic styles here
+import './Shop.css';
+import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 const API_URL = "http://127.0.0.1:8000"
 
 const Shop = () => {
@@ -34,7 +35,9 @@ const Shop = () => {
     );
     if (!loading) {
         return (
-            <div className="shop-container">
+            <>
+                <SectionHeading text={"Artist picks"} align={"center"}></SectionHeading>
+                <div className="shop-container">
                 <div className="filter-bar">
                     <input
                         type="text"
@@ -63,6 +66,7 @@ const Shop = () => {
                     ))}
                 </div>
             </div>
+            </>
         );
     } else {
         return (
