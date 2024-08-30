@@ -13,16 +13,13 @@ import {useContext, useState} from "react";
 
 function App() {
     const currentUser = useContext(AuthContext)
-    const [theme, setTheme] = useState('dark-theme');
-    const toggleTheme = () => {
-        setTheme(theme === 'light-theme' ? 'dark-theme' : 'light-theme');
-    };
+    document.body.setAttribute('data-theme', 'dark');
 
     return (
 
         <AuthProvider>
             <Router>
-                <Navbar theme={theme}/>
+                <Navbar/>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
                     <Route path="/shop" element={<Shop/>}/>

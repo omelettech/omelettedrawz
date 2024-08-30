@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './Gallery.css';
 import Layout from 'react-masonry-list';
 
@@ -7,6 +7,9 @@ import image2 from "../../assets/images/image2.png";
 import image3 from "../../assets/images/image3.png";
 import image4 from "../../assets/images/image4.png";
 import image5 from "../../assets/images/image5.png";
+import PageHeading from "../../components/PageHeading/PageHeading.tsx";
+import "yet-another-react-lightbox/styles.css";
+import Lightbox from "yet-another-react-lightbox";
 
 
 const images = [
@@ -25,6 +28,9 @@ const calculateHeight = (w, h) => {
 
 const Gallery = () => {
     const [layout, setLayout] = useState([]);
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [photoIndex, setPhotoIndex] = useState(0);
+
 
     useEffect(() => {
         const layoutData = images.map((img) => {
@@ -40,17 +46,44 @@ const Gallery = () => {
         setLayout(layoutData);
     }, []);
     console.log(layout)
+    const openModal = (index) => {
+        console.log(index)
+        setPhotoIndex(index);
+        setIsOpen(true);
+    };
     return (
-        <Layout
-            className="grid-container"
-            minWidth={minImgWidth}
-            items={layout.map((item) => (
-                <img className="gallery-item" src={item.src} alt={item.alt}
-                     style={{height: item.height, width: item.width}}>
-                </img>
-            ))}
-            gap={10}
-        ></Layout>
+
+        <>
+            <PageHeading text={"Gallery"} url={"/static/media/image2.2afdf2e7a647b3e0e510.png"}></PageHeading>
+
+            <Layout
+                className="grid-container"
+                minWidth={minImgWidth}
+                items={layout.map((item,index) => (
+                    <img className="gallery-item" src={item.src} alt={item.alt}
+                         style={{height: item.height, width: item.width}}
+                         onClick={() => {
+                             openModal(index)
+                         }}>
+                    </img>
+                ))}
+                gap={10}
+            >
+            </Layout>
+
+            <Lightbox
+                index={photoIndex}
+                animation={{navigation:100}}
+                open={isOpen}
+                close={() => setIsOpen(false)}
+
+                on={{view: ({index: currentIndex}) => setPhotoIndex(currentIndex)}}
+                slides={images}
+                styles={{ container: { backgroundColor: "rgba(0,0,0,0.7)",backdropFilter:"blur(3px)", transition: "all 200ms ease" } }}
+            />
+
+        </>
+
     );
 };
 

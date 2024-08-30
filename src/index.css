@@ -3,15 +3,33 @@
     --secondary-color: #2ecc71;
     --background-color: #ecf0f1;
     --text-color: #2c3e50;
+    --overlay: rgba(206, 206, 206, 0.5);
 
+
+}
+
+body[data-theme='dark'] {
     --font-h1: 'SuperFortress', sans-serif;
     --font-h2: 'DanielHands', sans-serif;
-    --font-h3: 'Aslam', sans-serif;
     --font-body: 'Aslam', sans-serif;
     --font-small: 'Aslam', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
-}
+        --overlay: rgba(0, 0, 0, 0.5);
 
+    background-color: var(--background-color);
+    margin-top: 60px;
+}
+body[data-theme='light'] {
+    --font-h1: 'SuperFortress', sans-serif;
+    --font-h2: 'DanielHands', sans-serif;
+    --font-body: 'Aslam', sans-serif;
+    --font-small: 'Aslam', sans-serif;
+    --font-btn: 'SuperFortress', sans-serif;
+    --overlay: rgba(255, 255, 255, 0.5);
+
+    background-color: var(--background-color);
+    margin-top: 60px;
+}
 @font-face {
     font-family: 'SuperFortress';
     src: url('./assets/fonts/Super-Fortress.ttf') format('woff2');
@@ -29,16 +47,6 @@
     font-family: 'DanielHands';
     src: url('./assets/fonts/DanielsHand-Regular.otf') format('woff2');
     font-style: normal;
-}
-
-body[data-theme='dark'] {
-    --font-h1: 'DanielHands', sans-serif;
-    --font-h2: 'DanielHands', sans-serif;
-    --font-body: 'Aslam', sans-serif;
-    --font-small: 'Aslam', sans-serif;
-    --font-btn: 'SuperFortress', sans-serif;
-
-    background-color: var(--background-color);
 }
 
 * {

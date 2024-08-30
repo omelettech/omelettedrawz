@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "./ThemeSwitcher.css"
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(document.body.getAttribute('data-theme'));
 
   const toggleTheme = () => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
