@@ -41,7 +41,8 @@ body[data-theme="dark"] {
   font-family: var(--font-btn);
   color: var(--navbar-link-color);
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  letter-spacing: 0.25pt;
 }
 
 .navbar a:hover {
@@ -189,10 +190,14 @@ body[data-theme="dark"] {
   right: 0;
   background-color: #fff;
   border-radius: 8px;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
   padding: 10px;
   z-index: 1000;
-  width: 200px;
+  width: max-content;
+  height: max-content;
 }
 
 .dropdown-menu a {

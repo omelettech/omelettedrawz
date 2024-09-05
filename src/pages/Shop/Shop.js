@@ -3,12 +3,50 @@ import axios from 'axios';
 import './Shop.css';
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
-const API_URL = "http://127.0.0.1:8000"
+import SidebarShop from "../../components/SidebarShop/SidebarShop";
 
+const API_URL = "http://127.0.0.1:8000"
+const filters = [
+    {
+        name: "Style",
+        options: ["Apple", "Samsung", "Sony", "LG"],
+    },
+    {
+        name: "Price range",
+        options: ["Under $10", "Under $25", "$25 - $50", "Under $25"],
+    },
+
+]
 const Shop = () => {
     const [products, setProducts] = useState([
-        {id: 1, name: 'Sticker Pack 1', price: 5.99, category: 'Stickers', image: '/images/sticker1.png'},
-        {id: 2, name: 'Art Print 1', price: 12.99, category: 'Prints', image: '/images/print1.png'},
+        {
+            id: 1,
+            name: 'Sticker Pack 1',
+            price: 5.99,
+            category: 'Stickers',
+            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
+        },
+        {
+            id: 2,
+            name: 'Art Print 1',
+            price: 12.99,
+            category: 'Prints',
+            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
+        },
+        {
+            id: 3,
+            name: 'Sticker Pack 2',
+            price: 4.99,
+            category: 'Stickers',
+            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
+        },
+        {
+            id: 4,
+            name: 'Art Print 2',
+            price: 16.99,
+            category: 'Prints',
+            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
+        },
     ]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
@@ -28,45 +66,46 @@ const Shop = () => {
 
         fetchProducts();
     }, []);
+    const handleFilterChange = (filter) => {
+        // Handle filter change
+        console.log(filter);
+    };
+    const getPageContent = () => {
+        if (!loading) {
+            return (
+                <div>
+                    <div className="filter-bar">
+                        <input
+                            type="text"
+                            placeholder="Search products..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <select
+                            value={selectedCategory}
+                            onChange={(e) => setSelectedCategory(e.target.value)}
+                        >
+                            <option value="All">All Categories</option>
+                            <option value="Stickers">Stickers</option>
+                            <option value="Prints">Prints</option>
+                            {/* Add more categories as needed */}
+                        </select>
+                    </div>
 
-    const getPageContent = () =>{
-        if(!loading){
-            return(
 
-            <div className="shop-container">
-                <SectionHeading text={"Artist picks"} align={"center"}></SectionHeading>
-
-                <div className="filter-bar">
-                    <input
-                        type="text"
-                        placeholder="Search products..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                    />
-                    <select
-                        value={selectedCategory}
-                        onChange={(e) => setSelectedCategory(e.target.value)}
-                    >
-                        <option value="All">All Categories</option>
-                        <option value="Stickers">Stickers</option>
-                        <option value="Prints">Prints</option>
-                        {/* Add more categories as needed */}
-                    </select>
+                    <div className="products-grid">
+                        {filteredProducts.map((product) => (
+                            <div key={product.id} className="product-card">
+                                <img src={product.image} alt={product.name}/>
+                                <h3>{product.name}</h3>
+                                <p>${product.price.toFixed(2)}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-
-                <div className="products-grid">
-                    {filteredProducts.map((product) => (
-                        <div key={product.id} className="product-card">
-                            <img src={product.image} alt={product.name}/>
-                            <h3>{product.name}</h3>
-                            <p>${product.price.toFixed(2)}</p>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )}
-        else{
-            return(<div>LOADING</div>)
+            )
+        } else {
+            return (<div>LOADING</div>)
         }
 
     }
@@ -76,12 +115,33 @@ const Shop = () => {
         (selectedCategory === 'All' || product.category === selectedCategory)
     );
 
+    function getSideBarContent() {
         return (
-            <>
-                <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>
-                {getPageContent()}
-            </>
-        );
+            <SidebarShop
+                categories={["Stickers", "Prints"]}
+                filters={filters}
+                onFilterChange={handleFilterChange}
+            > </SidebarShop>
+        )
+    }
+
+    return (
+        <>
+            <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>
+
+            <div>
+                <SectionHeading text={"Artist picks"} align={"center"}></SectionHeading>
+
+                <div className="shop-container">
+                    <div className={"shop-sidebar"}>
+                        {getSideBarContent()}
+                    </div>
+                    {getPageContent()}
+
+                </div>
+            </div>
+        </>
+    );
 
 
 };

@@ -3,25 +3,27 @@
     --secondary-color: #2ecc71;
     --background-color: #ecf0f1;
     --text-color: #2c3e50;
-    --overlay: rgba(206, 206, 206, 0.5);
 
 
 }
 
 body[data-theme='dark'] {
     --font-h1: 'SuperFortress', sans-serif;
-    --font-h2: 'DanielHands', sans-serif;
+    --font-h2: 'Bangers', sans-serif;
+    --font-h3: 'DanielHands', sans-serif;
     --font-body: 'Aslam', sans-serif;
     --font-small: 'Aslam', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
-        --overlay: rgba(0, 0, 0, 0.5);
+    --overlay: rgba(0, 0, 0, 0.5);
 
     background-color: var(--background-color);
     margin-top: 60px;
 }
+
 body[data-theme='light'] {
     --font-h1: 'SuperFortress', sans-serif;
-    --font-h2: 'DanielHands', sans-serif;
+    --font-h2: 'Bangers', sans-serif;
+    --font-h3: 'Aslam', sans-serif;
     --font-body: 'Aslam', sans-serif;
     --font-small: 'Aslam', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
@@ -30,6 +32,7 @@ body[data-theme='light'] {
     background-color: var(--background-color);
     margin-top: 60px;
 }
+
 @font-face {
     font-family: 'SuperFortress';
     src: url('./assets/fonts/Super-Fortress.ttf') format('woff2');
@@ -61,30 +64,40 @@ h1 {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 1.2;
+    letter-spacing: 1pt;
 }
 
 h2 {
     font-family: var(--font-h2);
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 600;
     line-height: 1.3;
+    letter-spacing: 3pt;
 }
+
 h3 {
     font-family: var(--font-h3);
-    font-size: 1.5rem;
+    font-size: 2rem;
     line-height: 1.3;
+    letter-spacing: -0.5pt;
 }
+
 p {
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.6;
 }
-button{
+
+button {
     font-family: var(--font-btn);
+        font-size: 1rem;
+    letter-spacing: 1pt;
 }
+
 small {
     font-family: var(--font-small);
     font-size: 0.875rem;
+
 }
 
 

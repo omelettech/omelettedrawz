@@ -70,7 +70,6 @@ const Gallery = () => {
                 gap={10}
             >
             </Layout>
-
             <Lightbox
                 index={photoIndex}
                 animation={{navigation:100}}
@@ -79,8 +78,13 @@ const Gallery = () => {
 
                 on={{view: ({index: currentIndex}) => setPhotoIndex(currentIndex)}}
                 slides={images}
-                styles={{ container: { backgroundColor: "rgba(0,0,0,0.7)",backdropFilter:"blur(3px)", transition: "all 200ms ease" } }}
+                styles={{
+                    container: { backgroundColor: "rgba(0,0,0,0.7)",backdropFilter:"blur(3px)", transition: "all 200ms ease" }
+
+
+            }}
             />
+
 
         </>
 
