@@ -23,7 +23,6 @@ body[data-theme="dark"] {
   position: fixed;
   width:100%;
   top: 0;
-  left: 0;
   justify-content: space-between;
   height: max-content;
   align-items: center;
@@ -48,14 +47,18 @@ body[data-theme="dark"] {
 .navbar a:hover {
   color: var(--navbar-hover-color);
 }
-
+.navbar-menu-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
 .navbar-menu {
   list-style: none;
   display: flex;
   gap: 6vw;
   margin: 0;
-  padding: 0 0 0 10px;
   align-content: center;
+  justify-content: center;
 }
 
 .navbar-brand {
@@ -65,7 +68,8 @@ body[data-theme="dark"] {
 
 .dropdown {
 
-  position: relative;
+  position: absolute;
+  right: 20px;
   display: flex;
   flex-direction: row;
   gap:10px
@@ -73,7 +77,6 @@ body[data-theme="dark"] {
 
 .dropdown-avatar {
   cursor: pointer;
-
   overflow: hidden;
   width: 40px;
   height: 40px;

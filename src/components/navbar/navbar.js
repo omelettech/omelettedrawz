@@ -12,8 +12,8 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate()
     const toggleDropdown = () => {
-            setIsOpen(!isOpen);
-        };
+        setIsOpen(!isOpen);
+    };
     const handleLogout = async () => {
         try {
             await auth.signOut();
@@ -33,38 +33,38 @@ const Navbar = () => {
                     </div>
                 </div>
             </div>
-            <div className="navbar-end">
+            <div className="navbar-menu-container">
                 <ul className="navbar-menu">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/shop">Shop</Link></li>
                     <li><Link to="/gallery">Gallery</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
+
                 </ul>
             </div>
-
-
             <div className="dropdown">
 
 
-                <div className="dropdown-avatar" onClick={toggleDropdown}>
-                    <img
-                        alt="Profile"
-                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-                    />
+                            <div className="dropdown-avatar" onClick={toggleDropdown}>
+                                <img
+                                    alt="Profile"
+                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                                />
 
-                </div>
-                {/* Dropdown Menu */}
-                {isOpen && (
-                    <div className="dropdown-menu">
-                        <ThemeSwitcher/>
-                        <hr/>
-                        {/* Add more dropdown items here */}
-                        <a href="#">Profile</a>
-                        <a href="#">Settings</a>
-                        <a href="#">Logout</a>
-                    </div>
-                )}
-            </div>
+                            </div>
+                            {/* Dropdown Menu */}
+                            {isOpen && (
+                                <div className="dropdown-menu">
+                                    <ThemeSwitcher/>
+                                    <hr/>
+                                    {/* Add more dropdown items here */}
+                                    <a href="#">Profile</a>
+                                    <a href="#">Settings</a>
+                                    <a href="#">Logout</a>
+                                </div>
+                            )}
+                        </div>
+
         </div>
     );
 };

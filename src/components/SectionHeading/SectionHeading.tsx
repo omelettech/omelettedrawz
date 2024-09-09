@@ -1,3 +1,4 @@
+// @ts-ignore
 import React from 'react';
 import './SectionHeading.css'; // Import the CSS file for styling
 
@@ -15,22 +16,24 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
                                                            align = 'left',
                                                            size = 'h2',
                                                            color = 'var(--primary-color)', // Use CSS variable for primary color
-                                                           paddingTop = '1rem',
-                                                           paddingBottom = '1rem',
-                                                           paddingRight = 10,
-                                                           paddingLeft = 10
+                                                           paddingTop = '1.5rem',
+                                                           paddingBottom = '1.5rem',
+                                                           paddingRight = 0,
+                                                           paddingLeft = 0
                                                        }) => {
-    // @ts-ignore
+
     return (
         <div
             className={`section-heading ${align}`}
             style={{
-                textAlign: align,
+                // @ts-ignore
+                TextAlign: align,
                 color: color,
                 paddingTop: paddingTop,
                 paddingBottom: paddingBottom,
                 paddingRight : paddingRight,
-                paddingLeft : paddingLeft
+                paddingLeft : paddingLeft,
+
             }}
         >
             {React.createElement(size, {className: 'heading'}, text)}

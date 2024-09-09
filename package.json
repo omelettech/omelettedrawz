@@ -13,6 +13,7 @@
     "react-loading-skeleton": "^3.4.0",
     "react-masonry-list": "^1.0.6",
     "react-photo-album": "^3.0.2",
+    "react-responsive-masonry": "^2.3.0",
     "react-router-dom": "^6.24.1",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4",

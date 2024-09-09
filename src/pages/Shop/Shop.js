@@ -74,23 +74,7 @@ const Shop = () => {
         if (!loading) {
             return (
                 <div>
-                    <div className="filter-bar">
-                        <input
-                            type="text"
-                            placeholder="Search products..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                        />
-                        <select
-                            value={selectedCategory}
-                            onChange={(e) => setSelectedCategory(e.target.value)}
-                        >
-                            <option value="All">All Categories</option>
-                            <option value="Stickers">Stickers</option>
-                            <option value="Prints">Prints</option>
-                            {/* Add more categories as needed */}
-                        </select>
-                    </div>
+
 
 
                     <div className="products-grid">

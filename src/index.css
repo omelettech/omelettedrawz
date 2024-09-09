@@ -6,7 +6,13 @@
 
 
 }
-
+.example::-webkit-scrollbar {
+  display: none;
+}
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
 body[data-theme='dark'] {
     --font-h1: 'SuperFortress', sans-serif;
     --font-h2: 'Bangers', sans-serif;
@@ -15,9 +21,9 @@ body[data-theme='dark'] {
     --font-small: 'Aslam', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
     --overlay: rgba(0, 0, 0, 0.5);
-
     background-color: var(--background-color);
     margin-top: 60px;
+
 }
 
 body[data-theme='light'] {
