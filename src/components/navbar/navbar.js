@@ -60,7 +60,7 @@ const Navbar = () => {
                                     {/* Add more dropdown items here */}
                                     <a href="#">Profile</a>
                                     <a href="#">Settings</a>
-                                    <a href="#">Logout</a>
+                                    <a onClick={handleLogout}>Logout</a>
                                 </div>
                             )}
                         </div>

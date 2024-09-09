@@ -2,47 +2,98 @@
   --text-color: #333;
 }
 
+/* Dark Theme */
+[data-theme="dark"] {
+  --primary-color: var(--primary-color-dark);
+  --secondary-color: var(--secondary-color-dark);
+  --text-color: var(--text-color-dark);
+  --background-color: var(--background-color-dark);
+}
+
+/* Light Theme */
+[data-theme="light"] {
+  --primary-color: var(--primary-color-light);
+  --secondary-color: var(--secondary-color-light);
+  --text-color: var(--text-color-light);
+  --background-color: var(--background-color-light);
+}
+
+/* Contact Form Container */
 .contact-container {
+  width: 100%;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
 }
 
+/* Contact Form Title */
 .contact-title {
-  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
   color: var(--primary-color);
+  text-align: center;
+  margin-bottom: 20px;
 }
 
+/* Contact Form */
 .contact-form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
-.contact-input,
+/* Form Inputs */
+.contact-input, .contact-textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+/* Placeholder Text */
+.contact-input::placeholder, .contact-textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Textarea */
 .contact-textarea {
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  height: 150px;
+  resize: none;
 }
 
-.contact-textarea {
-  resize: vertical;
-  height: 100px;
+/* Input Focus Effect */
+.contact-input:focus, .contact-textarea:focus {
+  border-color: var(--secondary-color);
+  outline: none;
 }
 
+/* Submit Button */
 .contact-button {
-  padding: 10px;
+  padding: 12px;
   background-color: var(--primary-color);
-  color: white;
+  color: var(--text-color);
+  font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
+/* Hover Effect on Button */
 .contact-button:hover {
-  background-color: darken(var(--primary-color), 10%);
+  background-color: var(--secondary-color);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .contact-container {
+    padding: 15px;
+  }
 }

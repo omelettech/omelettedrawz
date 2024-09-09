@@ -8,7 +8,7 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 
 const Home = () => {
     const {currentUser} = useContext(AuthContext)
-
+    console.log(currentUser)
     return (
         <>
             {!currentUser &&
