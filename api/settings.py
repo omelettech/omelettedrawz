@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import firebase_admin
+from firebase_admin import credentials
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+firebase_cred=credentials.Certificate()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -29,6 +31,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'backend',
+    'rest_framework',
     'corsheaders',
 ]
 
@@ -59,7 +63,7 @@ STATIC_URL = '/static/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
+        'DIRS': [os.path.join(SETTINGS_PATH, './backend/templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
