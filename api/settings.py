@@ -129,3 +129,5 @@ CORS_ORIGIN_ALLOW_ALL = True  # This is for testing purposes. In production, spe
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
