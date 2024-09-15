@@ -7,7 +7,7 @@ from rest_framework.routers import DefaultRouter
 from .views import (
     UserViewSet, CategoryViewSet, ProductTypeViewSet, AttributeViewSet, ProductViewSet, ProductAttributeViewSet,
     OrderViewSet, OrderItemViewSet, CartViewSet, CartItemViewSet, PaymentViewSet, ReviewViewSet, WishlistViewSet,
-    WishlistItemViewSet, ShippingViewSet
+    WishlistItemViewSet, ShippingViewSet, fetch_products, fetch_product_details
 )
 import backend
 router = DefaultRouter()
@@ -29,5 +29,7 @@ router.register(r'shippings', ShippingViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('printful/products/', fetch_products, name='get_printful_products'),
+    path('printful/products/<int:product_id>/', fetch_product_details, name='get_printful_products'),
 
 ]

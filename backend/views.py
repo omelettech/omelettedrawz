@@ -1,8 +1,19 @@
 from rest_framework import viewsets
 from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, Payment, Review, Wishlist, WishlistItem, Shipping
 from .serializers import UserSerializer, CategorySerializer, ProductTypeSerializer, AttributeSerializer, ProductSerializer, ProductAttributeSerializer, OrderSerializer, OrderItemSerializer, CartSerializer, CartItemSerializer, PaymentSerializer, ReviewSerializer, WishlistSerializer, WishlistItemSerializer, ShippingSerializer
+from django.http import JsonResponse
+from .printful_service import get_products, get_product_details
 
-# Basic CRUD operations are automatically handled by ViewSets in DRF
+
+
+def fetch_products(request):
+    products = get_products()
+    return JsonResponse(products)
+
+def fetch_product_details(request, product_id):
+    details = get_product_details(product_id)
+    return JsonResponse(details)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

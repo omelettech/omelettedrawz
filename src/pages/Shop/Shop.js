@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import './Shop.css';
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
@@ -6,6 +6,8 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
 
 const API_URL = "http://127.0.0.1:8000"
+
+
 const filters = [
     {
         name: "Style",
@@ -55,8 +57,9 @@ const Shop = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(API_URL + '/api/products/');
-                setProducts(response.data);
+                const response = await axios.get(API_URL + '/api/printful/products/');
+                setProducts(response.data.result);
+                console.log(response.data.result)
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -76,13 +79,12 @@ const Shop = () => {
                 <div>
 
 
-
                     <div className="products-grid">
                         {filteredProducts.map((product) => (
                             <div key={product.id} className="product-card">
-                                <img src={product.image} alt={product.name}/>
+                                <img src={product.thumbnail_url} alt={product.name}/>
                                 <h3>{product.name}</h3>
-                                <p>${product.price.toFixed(2)}</p>
+                                {/*<p>${product.price.toFixed(2)}</p>*/}
                             </div>
                         ))}
                     </div>
