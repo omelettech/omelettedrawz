@@ -4,6 +4,8 @@ import './Shop.css';
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
+import ProductDetails from "../ProductDetails/ProductDetails";
+import ProductDetail from "../ProductDetails/ProductDetails";
 
 const API_URL = "http://127.0.0.1:8000"
 
@@ -20,6 +22,12 @@ const filters = [
 
 ]
 const Shop = () => {
+    const handleProductClick = (product) =>{
+        setSelectedProduct(product)
+    }
+    const onClose = () =>{
+        setSelectedProduct(null)
+    }
     const [products, setProducts] = useState([
         {
             id: 1,
@@ -53,7 +61,7 @@ const Shop = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
-
+    const [selectedProduct,setSelectedProduct] = useState(null)
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -81,8 +89,8 @@ const Shop = () => {
 
                     <div className="products-grid">
                         {filteredProducts.map((product) => (
-                            <div key={product.id} className="product-card">
-                                <img src={product.thumbnail_url} alt={product.name}/>
+                            <div key={product.id} className="product-card" onClick={()=>handleProductClick(product)}>
+                                <img src={product.thumbnail_url || product.image} alt={product.name}/>
                                 <h3>{product.name}</h3>
                                 {/*<p>${product.price.toFixed(2)}</p>*/}
                             </div>
@@ -113,6 +121,14 @@ const Shop = () => {
 
     return (
         <>
+            {selectedProduct &&
+                <div className="modal-overlay" onClick={onClose}>
+                <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                    <span className="modal-close" onClick={onClose}>&times;</span>
+
+                    <ProductDetail product={selectedProduct}/>
+                </div>
+            </div>}
             <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>
 
             <div>
