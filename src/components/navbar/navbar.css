@@ -1,224 +1,264 @@
 :root {
-  --navbar-bg: #eee4d2;
-  --navbar-text-color: #262424;
-  --navbar-link-color: #ec8d00;
-  --navbar-hover-color: #388E3C;
-  --dropdown-bg: #f1e8e2;
-  --dropdown-text-color: #333;
-  --dropdown-hover-bg: #f0f0f0;
+    --navbar-bg: #eee4d2;
+    --navbar-text-color: #262424;
+    --navbar-link-color: #ec8d00;
+    --navbar-hover-color: #388E3C;
+    --dropdown-bg: #f1e8e2;
+    --dropdown-text-color: #333;
+    --dropdown-hover-bg: #f0f0f0;
 }
 
 body[data-theme="dark"] {
-  --navbar-bg: #333;
-  --navbar-text-color: #f5f5f5;
-  --navbar-link-color: #90caf9;
-  --navbar-hover-color: #64b5f6;
-  --dropdown-bg: #444;
-  --dropdown-text-color: #f5f5f5;
-  --dropdown-hover-bg: #555;
+    --navbar-bg: #333;
+    --navbar-text-color: #f5f5f5;
+    --navbar-link-color: #90caf9;
+    --navbar-hover-color: #64b5f6;
+    --dropdown-bg: #444;
+    --dropdown-text-color: #f5f5f5;
+    --dropdown-hover-bg: #555;
 }
 
 .navbar {
-  display: flex;
-  position: fixed;
-  width:100%;
-  top: 0;
-  justify-content: space-between;
-  height: max-content;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: var(--navbar-bg);
-  color: var(--navbar-text-color);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    justify-content: space-around;
+    height: max-content;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--navbar-bg);
+    color: var(--navbar-text-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
 }
-.navbar-end{
-  margin-right: auto;
-  margin-left: auto;
+
+.navbar-end {
+    margin-right: auto;
+    margin-left: auto;
 }
+
 .navbar a {
-  font-family: var(--font-btn);
-  color: var(--navbar-link-color);
-  text-decoration: none;
-  font-size: 1rem;
-  letter-spacing: 0.25pt;
+    font-family: var(--font-btn);
+    color: var(--navbar-link-color);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.25pt;
 }
 
 .navbar a:hover {
-  color: var(--navbar-hover-color);
+    color: var(--navbar-hover-color);
 }
+
 .navbar-menu-container {
-    flex: 1;
-    display: flex;
     justify-content: center;
+    height: 100%;
+
 }
+
 .navbar-menu {
-  list-style: none;
-  display: flex;
-  gap: 6vw;
-  margin: 0;
-  align-content: center;
-  justify-content: center;
+    position: relative;
+    list-style: none;
+    display: flex;
+    gap: 6vw;
+    margin: 0;
+    align-content: center;
+    justify-content: center;
+    width: auto;
 }
 
 .navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
 .dropdown {
 
-  position: absolute;
-  right: 20px;
-  display: flex;
-  flex-direction: row;
-  gap:10px
+    position: absolute;
+    display: flex;
+    flex-direction: row;
 }
 
-.dropdown-avatar {
-  cursor: pointer;
-  overflow: hidden;
-  width: 40px;
-  height: 40px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+
 
 .dropdown-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
-
 
 
 .badge {
-  background-color: var(--navbar-link-color);
-  color: #fff;
-  border-radius: 12px;
-  padding: 2px 8px;
-  font-size: 0.8rem;
-  margin-left: 5px;
+    background-color: var(--navbar-link-color);
+    color: #fff;
+    border-radius: 12px;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    margin-left: 5px;
 }
 
 
 .logo-container {
-  padding:5px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: max-content;
-  height: max-content;
-  display: flex;
-  flex-direction: row;
-  transition: all 0.2s ease;
+    padding: 5px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    transition: all 0.2s ease;
 
 }
 
 .logo {
-  width: 100%;
-  height: 100px;
-  clip-path: inset(0px 0px 0px 0px);
-  transition: all 0.2s ease;
+    width: 100%;
+    height: 100px;
+    clip-path: inset(0px 0px 0px 0px);
+    transition: all 0.2s ease;
 }
 
 .hover-image-container {
-  position: absolute;
-    padding:5px;
-  transform-origin:left;
-  top: 0;
-  left: 50.36px;
-  width: max-content;
-  height: max-content;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transform: scaleX(0);
-  transition: all 0.1s ease;
+    position: absolute;
+    padding: 5px;
+    transform-origin: left;
+    top: 0;
+    left: 50.36px;
+    width: max-content;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transform: scaleX(0);
+    transition: all 0.1s ease;
 }
 
 .hover-image {
-  width: 100%;
-  height: 100px;
-  animation: stretchBounce 0.4s ease forwards;
+    width: 100%;
+    height: 100px;
+    animation: stretchBounce 0.4s ease forwards;
 
 
 }
 
 .logo-container:hover .hover-image-container {
-  opacity: 1;
-  transform: scaleX(1);
-  animation: stretchBounce 0.6s ease-out;
+    opacity: 1;
+    transform: scaleX(1);
+    animation: stretchBounce 0.6s ease-out;
 }
-.logo-container:hover .logo{
+
+.logo-container:hover .logo {
     clip-path: inset(0px 45.36px 0px 0px);
 
 }
+
 /* Stretch and bounce effect */
 @keyframes stretchBounce {
-  0% {
-    transform: scaleX(0);
-  }
-  50% {
-    transform: scaleX(1.1);
-  }
-  100% {
-    transform: scaleX(1);
-  }
+    0% {
+        transform: scaleX(0);
+    }
+    50% {
+        transform: scaleX(1.1);
+    }
+    100% {
+        transform: scaleX(1);
+    }
 }
 
 
+.dropdown {
+    align-content: center;
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 10vw;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    height: 50px;
 
-.dropdown{
-  margin-right: 5vw;
-  position: relative;
-  display: inline-block;
+
 }
-
 .dropdown-avatar {
-  cursor: pointer;
+    cursor: pointer;
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease-out;
 }
 
 .avatar-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+    width: 40px;
+    height: 40px;
+        border: #ffffff 3px solid;
+
+
+
+}
+.avatar-name{
+    color: black;
+    overflow: clip;
+    align-items: center;
+    padding:1rem
+
 }
 
+
 /* Dropdown menu styling */
+
+.dropdown-menu-container {
+    position: absolute;
+    background-color: #fff;
+    top: 50px;
+    left: 0;
+
+    border-radius: 0 0 8px 8px;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 10vw;
+    transition: all 0.5s ease;
+
+}
+
 .dropdown-menu {
-  position: absolute;
-  top: 50px; /* Adjust this based on the size of your avatar */
-  right: 0;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  justify-content: center;
-  flex-direction: column;
-  display: flex;
-  padding: 10px;
-  z-index: 1000;
-  width: max-content;
-  height: max-content;
+    border-radius: 0 0 8px 8px;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    padding: 10px;
+    text-align: center;
+
 }
 
 .dropdown-menu a {
-  display: block;
-  padding: 8px 12px;
-  text-decoration: none;
-  color: #333;
-  border-radius: 4px;
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    border-radius: 4px;
 }
 
 .dropdown-menu a:hover {
-  background-color: #f0f0f0;
+    background-color: #ffffff;
 }
 
 /* Divider styling */
 .dropdown-menu hr {
-  border: none;
-  height: 1px;
-  background-color: #e0e0e0;
-  margin: 8px 0;
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 8px 0;
+}
+
+.dropdown-list {
+    list-style: none;
+
+}
+.dropdown-avatar-container{
+    align-items: center;
 }
