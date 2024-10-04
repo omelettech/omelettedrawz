@@ -4,7 +4,7 @@ import {AuthContext} from "../../context/AuthContext";
 import bg from '../../assets/images/image1.png'
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import "./Home.css"
-import ProductCard from "../../components/ProductCard/ProductCard";
+import BodyCard from "../../components/ProductCard/BodyCard";
 
 const Home = () => {
     const {currentUser} = useContext(AuthContext)
@@ -24,7 +24,7 @@ const Home = () => {
                 </div>
             }
             <SectionHeading text={"New arrivals"} align={"center"}/>
-            <ProductCard img={bg} title={"You look lonely"} buttonText={"Buy"}></ProductCard>
+            <BodyCard img={bg} title={"You look lonely"} buttonText={"Buy"}></BodyCard>
 
                 
 
