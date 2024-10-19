@@ -11,6 +11,7 @@ import Login from "./pages/Auth/Login";
 import {AuthContext, AuthProvider} from "./context/AuthContext";
 import {useContext, useState} from "react";
 import Cart from "./pages/Cart/Cart";
+import ComingSoon from "./pages/ComingSoon";
 
 function App() {
     const currentUser = useContext(AuthContext)
@@ -23,7 +24,7 @@ function App() {
                 <Navbar/>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
-                    <Route path="/shop" element={<Shop/>}/>
+                    <Route path="/shop" element={<ComingSoon/>}/>
                     <Route path="/about" element={<About/>}/>
                     <Route path="/gallery" element={<Gallery/>}/>
                     <Route path="/contact" element={<Contact/>}/>
