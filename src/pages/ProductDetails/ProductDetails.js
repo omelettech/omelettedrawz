@@ -1,20 +1,21 @@
-import React from 'react';
-import './ProductDetails.css';
+import React from "react";
+import "./ProductDetails.css"
+const ProductDetail = ({product}) => {
+    if (!product) return null;
 
-function ProductDetails() {
-  return (
-    <div className="product-details-container">
-      <h2 className="product-details-title">Product Name</h2>
-      <div className="product-details-content">
-        <img src="product-image-url" alt="Product" className="product-details-image" />
-        <div className="product-details-info">
-          <p className="product-details-description">Product description goes here.</p>
-          <p className="product-details-price">$99.99</p>
-          <button className="product-details-button">Add to Cart</button>
+    return (
+        <div className="product-detail-container">
+            <h2 className="product-title">{product.name}</h2>
+            <img src={product.image} alt={product.name} className="product-detail-image"/>
+            <p className="product-description">{product.description}</p>
+            <p className="product-price">${product.price}</p>
+
+            <button className="add-to-cart-button">Add to Cart</button>
+
+            {/* Recommendations Section */}
+
         </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
 
-export default ProductDetails;
+export default ProductDetail;

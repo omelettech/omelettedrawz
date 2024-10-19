@@ -8,7 +8,7 @@ type PageHeadingProps = {
     color?: string;
 };
 
-const PageHeading: React.FC<PageHeadingProps> = ({text, color = 'var(--primary-color)',url}) => {
+const PageHeading: React.FC<PageHeadingProps> = ({text, url}) => {
     // @ts-ignore
     return (
         <div

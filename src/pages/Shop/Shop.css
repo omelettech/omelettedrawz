@@ -83,3 +83,72 @@ body[data-theme='dark'] {
   font-size: 1rem;
   color: var(--primary-color);
 }
+
+/* Overlay for the modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal container */
+.modal-container {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  width: 90%;
+  max-width: 700px;
+  padding: 20px;
+  position: relative;
+  color: var(--text-color);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.modal-close:hover {
+  color: var(--button-hover-background-color);
+}
+
+.modal-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+/* Adjust existing styles for product details */
+.product-detail-container {
+  padding: 0;
+  background-color: transparent;
+}
+
+.add-to-cart-button {
+  width: 100%;
+}
+
+/* Recommendation section inside the modal */
+.recommendation-section {
+  margin-top: 30px;
+}
+
+.recommendation-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+}
