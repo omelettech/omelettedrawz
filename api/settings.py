@@ -52,7 +52,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS=[]
+CORS_ALLOWED_ORIGINS=[
+    'https://localhost:3000'
+]
 
 ROOT_URLCONF = 'api.urls'
 
@@ -129,3 +131,4 @@ CORS_ORIGIN_ALLOW_ALL = True  # This is for testing purposes. In production, spe
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+CORS_ALLOW_CREDENTIALS = True

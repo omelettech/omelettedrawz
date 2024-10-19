@@ -7,7 +7,7 @@ import SidebarShop from "../../components/SidebarShop/SidebarShop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductDetail from "../ProductDetails/ProductDetails";
 
-const API_URL = "http://127.0.0.1:8000"
+const API_URL = "http://127.0.0.1:8000/api"
 
 
 const filters = [
@@ -21,11 +21,12 @@ const filters = [
     },
 
 ]
+
 const Shop = () => {
-    const handleProductClick = (product) =>{
+    const handleProductClick = (product) => {
         setSelectedProduct(product)
     }
-    const onClose = () =>{
+    const onClose = () => {
         setSelectedProduct(null)
     }
     const [products, setProducts] = useState([
@@ -61,13 +62,14 @@ const Shop = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedProduct,setSelectedProduct] = useState(null)
+    const [selectedProduct, setSelectedProduct] = useState(null)
     useEffect(() => {
+
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(API_URL + '/api/printful/products/');
-                setProducts(response.data.result);
-                console.log(response.data.result)
+                const response = await axios.get(API_URL + '/products/');
+                console.log(response.data)
+                setProducts(response.data);
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -81,6 +83,12 @@ const Shop = () => {
         // Handle filter change
         console.log(filter);
     };
+
+    const getProductImage = (id) => {
+        console.log(id)
+        return "http://127.0.0.1:8000/media/images/8357566.jpg"
+
+    }
     const getPageContent = () => {
         if (!loading) {
             return (
@@ -89,10 +97,11 @@ const Shop = () => {
 
                     <div className="products-grid">
                         {filteredProducts.map((product) => (
-                            <div key={product.id} className="product-card" onClick={()=>handleProductClick(product)}>
-                                <img src={product.thumbnail_url || product.image} alt={product.name}/>
+
+                            <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
+                                <img src={getProductImage(product.images[0])} alt={product.name}/>
                                 <h3>{product.name}</h3>
-                                {/*<p>${product.price.toFixed(2)}</p>*/}
+                                <p>${product.price}</p>
                             </div>
                         ))}
                     </div>
@@ -123,12 +132,12 @@ const Shop = () => {
         <>
             {selectedProduct &&
                 <div className="modal-overlay" onClick={onClose}>
-                <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-                    <span className="modal-close" onClick={onClose}>&times;</span>
+                    <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                        <span className="modal-close" onClick={onClose}>&times;</span>
 
-                    <ProductDetail product={selectedProduct}/>
+                        <ProductDetail product={selectedProduct}/>
+                    </div>
                 </div>
-            </div>
             }
 
             <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>

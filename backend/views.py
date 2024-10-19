@@ -1,13 +1,17 @@
 from rest_framework import viewsets
-from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, Payment, Review, Wishlist, WishlistItem, Shipping
-from .serializers import UserSerializer, CategorySerializer, ProductTypeSerializer, AttributeSerializer, ProductSerializer, ProductAttributeSerializer, OrderSerializer, OrderItemSerializer, CartSerializer, CartItemSerializer, PaymentSerializer, ReviewSerializer, WishlistSerializer, WishlistItemSerializer, ShippingSerializer
+from rest_framework.decorators import api_view
+
+from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, Payment, Review, Wishlist, WishlistItem, Shipping, Image
+from .serializers import UserSerializer, CategorySerializer, ProductTypeSerializer, AttributeSerializer, ProductSerializer,\
+    ProductAttributeSerializer, OrderSerializer, OrderItemSerializer, CartSerializer, CartItemSerializer, PaymentSerializer,\
+    ReviewSerializer, WishlistSerializer, WishlistItemSerializer, ShippingSerializer,ImageSerializer
 from django.http import JsonResponse
 from .printful_service import get_products, get_product_details
 
 
-
+@api_view(['GET'])
 def fetch_products(request):
-    products = get_products()
+    products = Product.objects.all
     return JsonResponse(products)
 
 def fetch_product_details(request, product_id):
@@ -18,6 +22,7 @@ def fetch_product_details(request, product_id):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
@@ -74,3 +79,7 @@ class WishlistItemViewSet(viewsets.ModelViewSet):
 class ShippingViewSet(viewsets.ModelViewSet):
     queryset = Shipping.objects.all()
     serializer_class = ShippingSerializer
+
+class ImageViewSet(viewsets.ModelViewSet):
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
