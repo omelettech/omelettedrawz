@@ -21,9 +21,16 @@ const Navbar = () => {
                 navigate("/")
             } catch (error) {
                 console.error('Error logging out:', error);
+            } finally {
+                setIsOpen(false)
             }
 
         };
+
+        function handleLogin() {
+            setIsOpen(false)
+        }
+
         return (
             <div className={`navbar dark`}>
                 <div className="navbar-start">
@@ -90,11 +97,11 @@ const Navbar = () => {
                                 <li>
                                     <hr/>
                                 </li>
-                                <li><Link to="/contact">Profile</Link></li>
+                                {currentUser && <li><Link to="/contact">Profile</Link></li>}
                                 <li><Link to="/contact">Contact</Link></li>
                                 {currentUser ?
                                     <li onClick={handleLogout}><Link to={"/"}>Logout</Link></li>
-                                    : <li><Link to={"/login"}>Login</Link></li>}
+                                    : <li onClick={handleLogin}><Link to={"/login"}>Login</Link></li>}
                             </ul>}
                         </div>
                     </div>

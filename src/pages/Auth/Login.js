@@ -4,8 +4,8 @@ import {useNavigate} from 'react-router-dom'
 import {auth} from '../../config/firebase';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {AuthContext} from '../../context/AuthContext';
-import {GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
-
+import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
+import g_logo from "../../assets/images/google_logo.png"
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -18,14 +18,23 @@ function SignIn() {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate('/home')
+            navigate('/')
         } catch (err) {
             setError(err.message);
         }
     };
-    const handleGoogleLogin = async (e) =>{
-        let provider = await new GoogleAuthProvider();
-        return signInWithPopup(auth,provider)
+    const handleGoogleLogin = async (e) => {
+        try {
+            let provider = await new GoogleAuthProvider();
+            signInWithPopup(auth, provider).then(
+                () => navigate('/')
+            ).catch(
+                (e) => setError(e)
+            )
+        } catch (e) {
+            console.error(e)
+        }
+
     }
 
     return (
@@ -50,8 +59,16 @@ function SignIn() {
                 />
                 <button type="submit" className="signin-button">Sign In</button>
             </form>
-
-            <a onClick={handleGoogleLogin}>Google</a>
+            <br/>
+            <hr/>
+            <p align={'center'}>Or log in with</p>
+            <div style={{display:'flex',flexDirection:"row",justifyContent: 'center'}}>
+                <button onClick={handleGoogleLogin} className={"badge"}><img
+                    src={g_logo}
+                    alt="Google logo"
+                    style={{width: '25px'}}
+                /></button>
+            </div>
         </div>
     );
 }

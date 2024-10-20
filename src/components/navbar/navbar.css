@@ -2,8 +2,8 @@
     --navbar-bg: #eee4d2;
     --navbar-text-color: #262424;
     --navbar-link-color: #ec8d00;
-    --navbar-hover-color: #388E3C;
-    --dropdown-bg: #f1e8e2;
+    --navbar-hover-color: #de6b45;
+    --dropdown-bg: #000000;
     --dropdown-text-color: #333;
     --dropdown-hover-bg: #f0f0f0;
 }
@@ -13,7 +13,7 @@ body[data-theme="dark"] {
     --navbar-text-color: #f5f5f5;
     --navbar-link-color: #90caf9;
     --navbar-hover-color: #64b5f6;
-    --dropdown-bg: #444;
+    --dropdown-bg: #ffffff;
     --dropdown-text-color: #f5f5f5;
     --dropdown-hover-bg: #555;
 }
@@ -89,14 +89,7 @@ body[data-theme="dark"] {
 }
 
 
-.badge {
-    background-color: var(--navbar-link-color);
-    color: #fff;
-    border-radius: 12px;
-    padding: 2px 8px;
-    font-size: 0.8rem;
-    margin-left: 5px;
-}
+
 
 
 .logo-container {

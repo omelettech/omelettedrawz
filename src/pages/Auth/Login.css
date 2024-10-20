@@ -41,3 +41,17 @@
 .signin-button:hover {
   background-color: var(--primary-color), 10%;
 }
+.badge {
+    background-color: var(--dropdown-bg);
+    color: var(--button-text-color);
+    border-radius: 12px;
+    padding: 4px 8px;
+  justify-content: center;
+    margin: 5px;
+    cursor: pointer;
+  transition: background-color 0.3s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.badge:hover{
+  filter: invert();
+}
