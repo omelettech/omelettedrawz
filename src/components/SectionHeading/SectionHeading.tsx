@@ -19,7 +19,7 @@ const SectionHeading: React.FC<SectionHeadingProps> = ({
                                                            paddingTop = '1.5rem',
                                                            paddingBottom = '1.5rem',
                                                            paddingRight = 0,
-                                                           paddingLeft = 0
+                                                           paddingLeft = 0,
                                                        }) => {
 
     return (

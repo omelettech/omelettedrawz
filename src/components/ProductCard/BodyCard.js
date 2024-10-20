@@ -1,9 +1,9 @@
 import React from 'react';
 import './ProductCard.css';
 
-const BodyCard = ({ title, description, buttonText, reverse=false, img,hover=true }) => {
+const BodyCard = ({ title, description, buttonText, reverse=false, img,hover=true ,onClick}) => {
   return (
-      <div className={`body-card ${reverse ? 'reverse' : ''} ${hover ? 'hover' : ''}`}>
+      <div className={`body-card ${reverse ? 'reverse' : ''} ${hover ? 'hover' : ''}`} onClick={onClick}>
 
           <div className="body-image">
               <img src={img} alt="image"/>
