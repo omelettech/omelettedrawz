@@ -14,7 +14,6 @@ import Cart from "./pages/Cart/Cart";
 import ComingSoon from "./pages/ComingSoon";
 
 function App() {
-    const currentUser = useContext(AuthContext)
     document.body.setAttribute('data-theme', 'dark');
 
     return (

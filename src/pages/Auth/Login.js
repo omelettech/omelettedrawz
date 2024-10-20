@@ -4,6 +4,7 @@ import {useNavigate} from 'react-router-dom'
 import {auth} from '../../config/firebase';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {AuthContext} from '../../context/AuthContext';
+import {GoogleAuthProvider,signInWithPopup} from 'firebase/auth';
 
 function SignIn() {
     const [email, setEmail] = useState('');
@@ -22,6 +23,10 @@ function SignIn() {
             setError(err.message);
         }
     };
+    const handleGoogleLogin = async (e) =>{
+        let provider = await new GoogleAuthProvider();
+        return signInWithPopup(auth,provider)
+    }
 
     return (
         <div className="signin-container">
@@ -45,6 +50,8 @@ function SignIn() {
                 />
                 <button type="submit" className="signin-button">Sign In</button>
             </form>
+
+            <a onClick={handleGoogleLogin}>Google</a>
         </div>
     );
 }

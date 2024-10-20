@@ -56,7 +56,7 @@ const Navbar = () => {
                              style={{
                                  width: isOpen ? "100%" : "40px",
                                  borderRadius: isOpen ? "10px" : "50%",
-                                 border: !isOpen?"#ffffff 3px solid":"#fff 0 solid",
+                                 border: !isOpen ? "#ffffff 3px solid" : "#fff 0 solid",
 
 
                              }}
@@ -92,7 +92,9 @@ const Navbar = () => {
                                 </li>
                                 <li><Link to="/contact">Profile</Link></li>
                                 <li><Link to="/contact">Contact</Link></li>
-                                <li onClick={handleLogout}><Link to={"/"}>Logout</Link></li>
+                                {currentUser ?
+                                    <li onClick={handleLogout}><Link to={"/"}>Logout</Link></li>
+                                    : <li><Link to={"/login"}>Login</Link></li>}
                             </ul>}
                         </div>
                     </div>
