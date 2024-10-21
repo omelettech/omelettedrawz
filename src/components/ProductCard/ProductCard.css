@@ -10,7 +10,11 @@
   color: var(--text-color);
   transition: all 0.15s ease;
 }
+.card-btn:hover{
+  filter: invert();
+  transition: all 0.2s ease;
 
+}
 .body-card.reverse {
   flex-direction: row-reverse;
 }
