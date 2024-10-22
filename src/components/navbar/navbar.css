@@ -93,6 +93,7 @@ body[data-theme="dark"] {
 
 
 .logo-container {
+    cursor: pointer;
     padding: 5px;
     position: absolute;
     top: 0;

@@ -33,7 +33,7 @@ const Navbar = () => {
 
         return (
             <div className={`navbar dark`}>
-                <div className="navbar-start">
+                <div className="navbar-start" onClick={()=>navigate("/")}>
                     <div className="logo-container">
                         <img src={logo} alt="Logo" className="logo"/>
                         <div className="hover-image-container">

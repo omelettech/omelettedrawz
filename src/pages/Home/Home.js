@@ -23,7 +23,7 @@ const Home = () => {
                         <h1>GIVE YOUR PERSONAL SPACE LIFE</h1>
                         <h3>With stickers, postcards, canvas prints, and more.</h3>
                         <div className="hero-buttons">
-                            <button className="btn primary">Shop</button>
+                            <button className="btn primary" onClick={()=>navigate('/shop')}>Shop</button>
                             <button className="btn secondary">Custom</button>
                         </div>
                     </div>
