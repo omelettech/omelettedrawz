@@ -1,22 +1,3 @@
-:root {
-  --text-color: #333;
-}
-
-/* Dark Theme */
-[data-theme="dark"] {
-  --primary-color: var(--primary-color-dark);
-  --secondary-color: var(--secondary-color-dark);
-  --text-color: var(--text-color-dark);
-  --background-color: var(--background-color-dark);
-}
-
-/* Light Theme */
-[data-theme="light"] {
-  --primary-color: var(--primary-color-light);
-  --secondary-color: var(--secondary-color-light);
-  --text-color: var(--text-color-light);
-  --background-color: var(--background-color-light);
-}
 
 /* Contact Form Container */
 .contact-container {

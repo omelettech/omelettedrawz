@@ -1,11 +1,4 @@
 :root {
-  --button-bg: #333;
-  --button-text: #fff;
-  --button-bg-hover: #555;
-  --button-text-hover: #f0f0f0;
-}
-
-[data-theme='light'] {
   --button-bg: #f0f0f0;
   --button-text: #333;
   --button-bg-hover: #ccc;
