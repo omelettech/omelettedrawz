@@ -14,7 +14,6 @@ const Home = () => {
     const navigate = useNavigate(); // Initialize useHistory
 
     const {currentUser} = useContext(AuthContext)
-    console.log(currentUser)
     return (
         <>
             {!currentUser &&

@@ -68,7 +68,6 @@ const Shop = () => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(API_URL + '/products/');
-                console.log(response.data)
                 setProducts(response.data);
                 setLoading(false);
             } catch (error) {
@@ -85,7 +84,6 @@ const Shop = () => {
     };
 
     const getProductImage = (id) => {
-        console.log(id)
         return "http://127.0.0.1:8000/media/images/8357566.jpg"
 
     }

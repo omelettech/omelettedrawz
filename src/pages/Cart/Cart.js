@@ -83,7 +83,7 @@ const CartPage = () => {
                             <h2>{item.name}</h2>
                             <p>Price: ${item.price.toFixed(2)}</p>
                             <label>
-                                Quantity:
+                                Qty:
                                 <input
                                     type="number"
                                     min="1"
@@ -97,7 +97,7 @@ const CartPage = () => {
 
                     ))}
                     <div align={"right"}>
-                        <h3>Total Price: ${getTotalPrice()}</h3>
+                        <h3 style={{fontFamily:"sans-serif"}}>Total Price: ${getTotalPrice()}</h3>
                         <button className="btn primary" style={{padding: "10px 20px", marginTop: "20px"}}>
                             Checkout
                         </button>
