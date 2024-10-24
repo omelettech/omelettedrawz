@@ -31,7 +31,9 @@ const Navbar = () => {
             setIsOpen(false)
         }
 
-        return (
+    let avatarStroke = "#ffffff";
+
+    return (
             <div className={`navbar dark`}>
                 <div className="navbar-start" onClick={()=>navigate("/")}>
                     <div className="logo-container">
@@ -53,7 +55,7 @@ const Navbar = () => {
 
                 <div className="dropdown" style={
                     {
-                        background: isOpen ? "#fff" : "rgba(0,0,0,0)",
+                        background: isOpen ? "var(--dropdown-bg)" : "var(--dropdon-bg)",
                         transition: "all 0.5s ease",
                         boxShadow: "0 0 0 #fff"
                     }}>
@@ -63,7 +65,7 @@ const Navbar = () => {
                              style={{
                                  width: isOpen ? "100%" : "40px",
                                  borderRadius: isOpen ? "10px" : "50%",
-                                 border: !isOpen ? "#ffffff 3px solid" : "#fff 0 solid",
+                                 border: !isOpen ? avatarStroke + " 3px solid" : "#fff 0 solid",
 
 
                              }}
