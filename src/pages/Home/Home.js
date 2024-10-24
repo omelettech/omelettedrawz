@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import speech_bubble from "../../components/Speech_bubble/speech_bubble";
 import {AuthContext} from "../../context/AuthContext";
 import bg from '../../assets/images/image1.png'
 import red_guy from '../../assets/images/red guy2.png'
