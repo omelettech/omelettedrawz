@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import "./Cart.css"
+import {useNavigate} from "react-router-dom";
 // Sample cart data
 const sampleCartItems = [
     {
@@ -35,15 +36,25 @@ const CartPage = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
 
+    const handleItemOnclick=(id)=> {
+        console.log(id)
+        return navigate("/shop");
+    }
+    const navigate = useNavigate()
+
     return (
         <div className={"cart-container"}>
             <h1>Your Cart</h1>
+            <br/>
+            <hr/>
+            <br/>
+
             {cartItems.length === 0 ? (
                 <p>Your cart is empty.</p>
             ) : (
                 <div>
                     {cartItems.map((item) => (
-                        <div key={item.id} className={'cart-item'}>
+                        <div key={item.id} className={'cart-item'} onClick={handleItemOnclick(item.id)}>
                             <h2>{item.name}</h2>
                             <p>Price: ${item.price.toFixed(2)}</p>
                             <label>

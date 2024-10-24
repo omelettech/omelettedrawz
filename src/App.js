@@ -41,7 +41,12 @@ function App() {
                         </svg>
                     </Link>
                 </div>
+
+                <footer>
+                    <p align={'right'}>&copy;Awsaf Fida Mahmud</p>
+                </footer>
             </Router>
+
 
         </AuthProvider>
     );

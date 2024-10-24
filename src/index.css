@@ -1,25 +1,27 @@
 :root {
-    --primary-color: #FF8400;
-    --secondary-color: #FFD93D;
-    --background-color: #F4F6FF;
-    --text-color: #333;
+    --primary-color: #FFA45B;
+    --secondary-color: #FFDA77;
+    --background-color: #FBF6F0;
+    --text-color: #161618;
 
     --button-background-color: #333;
     --button-text-color: #F6F1E9;
     --button-hover-background-color: #000;
 
-    --navbar-bg: #eee4d2;
+    --navbar-bg: #FBF6F0;
     --navbar-text-color: #333;
-    --navbar-link-color: #ec8d00;
+    --navbar-link-color: #FF8356;
     --navbar-hover-color: #4F200D;
 
-    --dropdown-bg: #F6F1E9;
+    --dropdown-bg: rgba(251, 246, 240, 0.5);
     --dropdown-text-color: #333;
     --dropdown-hover-bg: #f0f0f0;
-    --dropdown-hover-color: #de6b45;
+    --dropdown-hover-color: #FF8356;
 
-  --card-background: rgb(255, 255, 255);
-  --card-shadow: rgba(0, 0, 0, 0.1);
+    --card-background: rgba(255, 229, 179, 0.5);
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --overlay: rgba(0, 0, 0, 0.5);
+
 
 }
 
@@ -36,9 +38,10 @@ body[data-theme='dark'] {
     --navbar-text-color: #f5f5f5;
     --navbar-link-color: #90caf9;
     --navbar-hover-color: #64b5f6;
-    --dropdown-bg: #ffffff;
+    --dropdown-bg: rgba(255, 255, 255, 0.5);
     --dropdown-text-color: #f5f5f5;
     --dropdown-hover-bg: #555;
+    --dropdown-hover-color: #64b5f6;
 
 
 }
@@ -51,7 +54,6 @@ body[data-theme='dark'] {
     --font-body: 'Bromine', sans-serif;
     --font-small: 'Bromine', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
-    --overlay: rgba(0, 0, 0, 0.5);
     margin-top: 60px;
     background-color: var(--background-color);
 
@@ -64,9 +66,8 @@ body[data-theme='light'] {
     --font-body: 'Bromine', sans-serif;
     --font-small: 'Bromine', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
-    --overlay: rgba(255, 255, 255, 0.85);
     margin-top: 60px;
-        background-color: var(--background-color);
+    background-color: var(--background-color);
 
 
 }
@@ -88,6 +89,7 @@ body[data-theme='light'] {
     font-family: 'DanielHands';
     src: url('./assets/fonts/DanielsHand-Regular.otf') format('woff2');
     font-style: normal;
+
 }
 
 * {
@@ -136,6 +138,10 @@ small {
     font-family: var(--font-small);
     font-size: 0.875rem;
 
+}
+
+h1, h2, h3, p, small {
+    color: var(--text-color);
 }
 
 .cart-btn {

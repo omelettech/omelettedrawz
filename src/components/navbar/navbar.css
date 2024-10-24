@@ -149,7 +149,7 @@
     background-color:  var(--dropdown-bg);
     border-radius: 8px 8px 0 0;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    width: 10vw;
+    width: max(7vw,75px);
     padding-right: 0.5rem;
     padding-left: 0.5rem;
     height: 50px;
@@ -188,14 +188,14 @@
     background-color: var(--dropdown-bg);
     top: 50px;
     left: 0;
-
+    backdrop-filter: blur(3px);
     border-radius: 0 0 8px 8px;
     justify-content: center;
     flex-direction: column;
     display: flex;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-    width: 10vw;
+    width: inherit;
     transition: all 0.5s ease;
 
 }
@@ -219,7 +219,7 @@
 }
 
 .dropdown-menu a:hover {
-    filter:invert();
+    color: var(--dropdown-hover-color);
 }
 
 /* Divider styling */
