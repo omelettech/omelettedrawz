@@ -43,7 +43,7 @@ function App() {
                 </div>
 
                 <footer>
-                    <p align={'right'}>&copy;Awsaf Fida Mahmud</p>
+                    <p align={'center'} style={{paddingRight:"10px"}}>&copy; Awsaf Fida Mahmud 2024</p>
                 </footer>
             </Router>
 
