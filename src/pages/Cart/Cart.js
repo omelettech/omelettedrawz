@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import "./Cart.css"
 import {useNavigate} from "react-router-dom";
+import BodyCard from "../../components/ProductCard/BodyCard";
+import Popup from "../../components/Popup/Popup";
 // Sample cart data
 const sampleCartItems = [
     {
@@ -15,10 +17,22 @@ const sampleCartItems = [
         price: 5.0,
         quantity: 1,
     },
+    {
+        id: 3,
+        name: "Patch B",
+        price: 5.0,
+        quantity: 1,
+    },{
+        id: 4,
+        name: "Patch B",
+        price: 5.0,
+        quantity: 1,
+    },
 ];
 
 const CartPage = () => {
     const [cartItems, setCartItems] = useState(sampleCartItems);
+    const [displayPopup, setDisplayPopup] = useState(false);
 
     const handleQuantityChange = (id, newQuantity) => {
         setCartItems((prevItems) =>
@@ -29,17 +43,19 @@ const CartPage = () => {
     };
 
     const handleRemoveItem = (id) => {
-        setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        setDisplayPopup(true);
     };
+
+    const RemoveItem = (id) => {
+        return setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+
+    }
 
     const getTotalPrice = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
 
-    const handleItemOnclick=(id)=> {
-        console.log(id)
-        return navigate("/shop");
-    }
+
     const navigate = useNavigate()
 
     return (
@@ -54,7 +70,16 @@ const CartPage = () => {
             ) : (
                 <div>
                     {cartItems.map((item) => (
-                        <div key={item.id} className={'cart-item'} onClick={handleItemOnclick(item.id)}>
+                        <div key={item.id} className={'cart-item'} >
+                            {displayPopup && <Popup onClickBG={()=>setDisplayPopup(false)}>
+                                <p>Are you sure</p>
+                                <button className={"btn secondary"} onClick={()=>RemoveItem(item.id)}>Yes</button>
+                                <button className={"btn primary"} onClick={() => {
+                                    setDisplayPopup(false)
+                                }}>No
+                                </button>
+
+                            </Popup>}
                             <h2>{item.name}</h2>
                             <p>Price: ${item.price.toFixed(2)}</p>
                             <label>
@@ -67,12 +92,13 @@ const CartPage = () => {
                                 />
                             </label>
                             <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
-                            <button onClick={() => handleRemoveItem(item.id)}>Remove</button>
+                            <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>Remove</button>
                         </div>
+
                     ))}
-                    <div>
+                    <div align={"right"}>
                         <h3>Total Price: ${getTotalPrice()}</h3>
-                        <button style={{padding: "10px 20px", marginTop: "20px"}}>
+                        <button className="btn primary" style={{padding: "10px 20px", marginTop: "20px"}}>
                             Checkout
                         </button>
                     </div>
