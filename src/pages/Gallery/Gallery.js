@@ -47,6 +47,7 @@ const Gallery = () => {
 
 
             return {
+                id:img.src,
                 ...img,
                 width: img.width < minImgWidth ? img.width : minImgWidth,
                 height: calculateHeight(img.width, img.height)
@@ -55,9 +56,7 @@ const Gallery = () => {
 
         setLayout(layoutData);
     }, []);
-    console.log(layout)
     const openModal = (index) => {
-        console.log(index)
         setPhotoIndex(index);
         setIsOpen(true);
     };
@@ -77,11 +76,11 @@ const Gallery = () => {
 
                 >
                     {layout.map((item, index) => (
-                        <img className="gallery-item" src={item.src} alt={item.alt}
-                             onClick={() => {
-                                 openModal(index)
-                             }}>
-                        </img>
+                        <div key={item.id}><img className="gallery-item" src={item.src} alt={item.alt}
+                                onClick={() => {
+                                    openModal(index)
+                                }}>
+                        </img></div>
                     ))}
                     gap={10}
                 </Masonry>
