@@ -10,25 +10,39 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+from decouple import config
+import firebase_admin
+from firebase_admin import credentials
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import pyrebase
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kwep_8^)q+9h1ru-!m#6%f)^fs&b&2c$fl5a0+an0+j&v#sqmk'
-PRINTFUL_API_KEY = 'MMqEs8oZwOkrklgAq2D47A23CSdXybMk9v31qbI2'
+
+SECRET_KEY = config("SECRET_KEY")
+# Firebase settings
+try:
+
+    cred = credentials.Certificate(".keys.json")
+    firebase_admin.initialize_app(cred)
+except Exception:
+    raise Exception(
+        "Firebase configuration credentials not found. Please add the configuration to the environment variables.")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+AUTH_USER_MODEL = "backend.User"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,6 +54,7 @@ INSTALLED_APPS = [
     'backend',
     'rest_framework',
     'corsheaders',
+    'firebase_auth'
 ]
 
 MIDDLEWARE = [
@@ -52,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
-CORS_ALLOWED_ORIGINS=[
+CORS_ALLOWED_ORIGINS = [
     'https://localhost:3000'
 ]
 
@@ -77,17 +92,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'api.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR +'/db.sqlite3',
+        'NAME': BASE_DIR + '/db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -106,7 +119,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
