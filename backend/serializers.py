@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, Payment, Review, Wishlist, WishlistItem, Shipping,Image
+from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, \
+    Payment, Review, Wishlist, WishlistItem, Shipping, Image, Portfolio
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -95,3 +96,7 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
         fields= '__all__'
+class PortfolioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Portfolio
+        fields = '__all__'

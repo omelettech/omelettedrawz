@@ -257,3 +257,12 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f'{self.product.name} ({self.quantity})'
+
+class Portfolio(models.Model):
+    image=models.ForeignKey(Image,on_delete=models.CASCADE)
+    title=models.CharField(max_length=50,null=True)
+    description=models.CharField(max_length=255,null=True)
+    date = models.DateTimeField(null=True)
+    dimensions = models.CharField(max_length=25,null=True)
+    medium=models.CharField(max_length=50,null=True)
+
