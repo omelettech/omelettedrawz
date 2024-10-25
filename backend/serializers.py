@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, \
-    Payment, Review, Wishlist, WishlistItem, Shipping, Image, Portfolio
+    Payment, Review, Wishlist, WishlistItem, Shipping, Image, Portfolio, ShippingAddress
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -91,6 +91,11 @@ class ShippingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Shipping
         fields = ['id', 'order', 'shipping_address', 'shipping_date', 'delivery_date', 'shipping_method', 'shipping_cost']
+
+class ShippingAddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ShippingAddress
+        fields="__all__"
 
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:

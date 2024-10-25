@@ -204,7 +204,7 @@ class Shipping(models.Model):
     shipping_cost = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f'Shipping for Order {self.order.id}'
+        return f'Shipping for {self.shipping_address.customer_name}'
 
 
 class Order(models.Model):

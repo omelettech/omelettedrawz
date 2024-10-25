@@ -2,13 +2,13 @@ from rest_framework import viewsets
 from rest_framework.decorators import api_view
 
 from .models import User, Category, ProductType, Attribute, Product, ProductAttribute, Order, OrderItem, Cart, CartItem, \
-    Payment, Review, Wishlist, WishlistItem, Shipping, Image, Portfolio
+    Payment, Review, Wishlist, WishlistItem, Shipping, Image, Portfolio, ShippingAddress
 from .serializers import UserSerializer, CategorySerializer, ProductTypeSerializer, AttributeSerializer, \
     ProductSerializer, \
     ProductAttributeSerializer, OrderSerializer, OrderItemSerializer, CartSerializer, CartItemSerializer, \
     PaymentSerializer, \
     ReviewSerializer, WishlistSerializer, WishlistItemSerializer, ShippingSerializer, ImageSerializer, \
-    PortfolioSerializer
+    PortfolioSerializer, ShippingAddressSerializer
 from django.http import JsonResponse
 from .printful_service import get_products, get_product_details
 
@@ -83,6 +83,10 @@ class WishlistItemViewSet(viewsets.ModelViewSet):
 class ShippingViewSet(viewsets.ModelViewSet):
     queryset = Shipping.objects.all()
     serializer_class = ShippingSerializer
+
+class ShippingAddressViewSet(viewsets.ModelViewSet):
+    queryset = ShippingAddress.objects.all()
+    serializer_class = ShippingAddressSerializer
 
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
