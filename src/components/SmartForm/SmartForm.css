@@ -28,7 +28,7 @@ body[data-theme='dark'] {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: var(--form-bg);
+    background-color: var(--card-background);
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
