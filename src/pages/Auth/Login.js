@@ -38,7 +38,7 @@ function SignIn() {
     }
 
     return (
-        <div className="signin-container">
+        <div className="form-container">
             <h2 className="signin-title">Sign In</h2>
             {currentUser && <p>Welcome back, {currentUser.email}</p>}
             {error && <p className="signin-error">{error}</p>}

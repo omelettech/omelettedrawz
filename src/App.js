@@ -12,6 +12,7 @@ import {AuthContext, AuthProvider} from "./context/AuthContext";
 import {useContext, useState} from "react";
 import Cart from "./pages/Cart/Cart";
 import ComingSoon from "./pages/ComingSoon";
+import SmartForm from "./components/SmartForm/SmartForm";
 
 function App() {
     document.body.setAttribute('data-theme', 'dark');
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/register" element={<Register/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path={"/cart"} element={<Cart/>}></Route>
+                    <Route path={'/forms'} element={<SmartForm></SmartForm>}></Route>
 
                 </Routes>
                 <div className={"cart-btn"}>

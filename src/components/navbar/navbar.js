@@ -94,8 +94,8 @@ const Navbar = () => {
                             <hr/>
                             {isOpen && <ul className={"dropdown-list"}>
                                 <li><Link to="/about">About me</Link></li>
+                                <li><Link to="/links">Socials</Link></li>
 
-                                <li><Link to="/contact">Contact</Link></li>
                                 <li>
                                     <hr/>
                                 </li>

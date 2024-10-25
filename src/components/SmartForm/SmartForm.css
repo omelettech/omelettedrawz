@@ -1,0 +1,164 @@
+:root {
+    --form-label-color: #333;
+    --form-input-border: #fff;
+    --form-input-bg: transparent;
+    --form-bg: #efebe6;
+    --form-focus-border: #ff4b4b;
+    --form-focus-glow: var(--navbar-link-color);
+    --form-focus-bg: #f8e5da;
+
+}
+
+body[data-theme='dark'] {
+    --form-label-color: #ffffff;
+    --form-input-border: transparent;
+    --form-input-bg: transparent;
+    --form-bg: #333;
+
+    --form-focus-border: #4b8aff;
+    --form-focus-glow: var(--navbar-link-color);
+    --form-focus-bg: rgb(54, 58, 68);
+
+
+}
+
+
+.form-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: var(--form-bg);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    align-items: center;
+    margin-top: 5px;
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    font-size: 1.25rem;
+}
+
+input[type='text'], input[type='password'],
+input[type='number'],
+input[type='date'],
+input[type="email"],
+input[type='text'],
+select,
+textarea {
+    padding: 10px;
+    color: var(--text-color);
+    font-size: 1rem;
+    border: 2px solid var(--form-input-border);
+    margin-top: 5px;
+    background-color: var(--form-input-bg);
+    box-shadow: 2px 2px var(--text-color);
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    width: auto;
+    margin-right: 10px;
+
+}
+
+input::placeholder {
+    font-family: var(--font-small);
+}
+
+fieldset {
+    border: none;
+    margin-bottom: 15px;
+}
+
+fieldset legend {
+    font-family: var(--font-small);
+}
+
+button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #003f80;
+    transition: all 0.3s ease;
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+input[type="color"] {
+    width: 60px;
+    height: 40px;
+    padding: 0;
+}
+
+input[type="file"] {
+    padding: 0;
+}
+
+textarea {
+    width: 100%;
+    resize: vertical;
+    font-family: sans-serif;
+}
+
+@media (min-width: 600px) {
+    .form-container {
+        padding: 40px;
+    }
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    background-color: var(--form-focus-bg);
+    outline: none; /* Remove the default browser outline */
+    border-color: var(--form-focus-border); /* Add a blue border */
+    box-shadow: 0 0 10px var(--form-focus-glow); /* Add a subtle glow */
+
+}
+
+/* Checkbox and radio focus */
+input[type="checkbox"]:focus,
+input[type="radio"]:focus {
+    outline: 2px solid var(--form-input-border); /* Show a blue outline */
+    outline-offset: 2px;
+}
+
+/* Change background color of range input when focused */
+input[type="range"]:focus {
+    outline: none;
+    background-color: #ddd; /* Change background */
+}
+
+/* Change file input appearance on focus */
+input[type="file"]:focus {
+    outline: 2px dashed #007BFF;
+    border-color: #007BFF;
+}
+
+/* Style the submit button when focused */
+button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glow effect */
+}
