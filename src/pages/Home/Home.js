@@ -11,10 +11,12 @@ import BodyCard from "../../components/ProductCard/BodyCard";
 
 const Home = () => {
     const navigate = useNavigate(); // Initialize useHistory
-
     const {currentUser} = useContext(AuthContext)
+        console.log(currentUser)
+
     return (
         <>
+
             {!currentUser &&
                 <div className="hero-section">
                     <div className="hero-content">
