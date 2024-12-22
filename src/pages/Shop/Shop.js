@@ -7,7 +7,7 @@ import SidebarShop from "../../components/SidebarShop/SidebarShop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductDetail from "../ProductDetails/ProductDetails";
 
-const API_URL = "http://127.0.0.1:8000/api"
+const API_URL = "http://127.0.0.1:8000/products/v1/"
 
 
 const filters = [
@@ -67,8 +67,10 @@ const Shop = () => {
 
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(API_URL + '/products/');
+                const response = await axios.get(API_URL + "products");
+
                 setProducts(response.data);
+                console.log(response.data)
                 setLoading(false);
             } catch (error) {
                 console.error('Error fetching products:', error);
@@ -97,9 +99,11 @@ const Shop = () => {
                         {filteredProducts.map((product) => (
 
                             <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
-                                <img src={getProductImage(product.images[0])} alt={product.name}/>
+                                <img src={getProductImage(1)} alt={product.name}/>
+                                {// TODO: add proper image fetching functionality
+                                }
                                 <h3>{product.name}</h3>
-                                <p>${product.price}</p>
+                                {/*<p>${product.price}</p>*/}
                             </div>
                         ))}
                     </div>
