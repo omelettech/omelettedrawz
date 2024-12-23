@@ -22,6 +22,12 @@
     --card-shadow: rgba(0, 0, 0, 0.1);
     --overlay: rgba(0, 0, 0, 0.5);
 
+    --font-h1: 'SuperFortress', sans-serif;
+    --font-h2: 'Bangers', sans-serif;
+    --font-h3: 'Bangers', sans-serif;
+    --font-body: 'Bromine', sans-serif;
+    --font-small: 'Bromine', sans-serif;
+    --font-btn: 'SuperFortress', sans-serif;
 
 }
 
@@ -48,28 +54,14 @@ body[data-theme='dark'] {
 
 
 body[data-theme='dark'] {
-    --font-h1: 'SuperFortress', sans-serif;
-    --font-h2: 'Bangers', sans-serif;
-    --font-h3: 'DanielHands', sans-serif;
-    --font-body: 'Bromine', sans-serif;
-    --font-small: 'Bromine', sans-serif;
-    --font-btn: 'SuperFortress', sans-serif;
     margin-top: 60px;
     background-color: var(--background-color);
 
 }
 
 body[data-theme='light'] {
-    --font-h1: 'SuperFortress', sans-serif;
-    --font-h2: 'Bangers', sans-serif;
-    --font-h3: 'DanielHands', sans-serif;
-    --font-body: 'Bromine', sans-serif;
-    --font-small: 'Bromine', sans-serif;
-    --font-btn: 'SuperFortress', sans-serif;
     margin-top: 60px;
     background-color: var(--background-color);
-
-
 }
 
 @font-face {
@@ -121,12 +113,12 @@ h3 {
     font-family: var(--font-h3);
     font-size: 2rem;
     line-height: 1.3;
-    letter-spacing: -0.5pt;
+    letter-spacing: 1pt;
 }
 
 p {
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 1.5rem;
     line-height: 1.6;
 }
 

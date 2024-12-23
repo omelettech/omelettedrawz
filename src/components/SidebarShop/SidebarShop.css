@@ -74,3 +74,11 @@
     z-index: 999;
   }
 }
+
+.filter-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  flex-wrap: wrap;
+}

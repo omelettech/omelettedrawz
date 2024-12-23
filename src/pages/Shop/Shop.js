@@ -12,23 +12,25 @@ const API_URL = "http://127.0.0.1:8000/products/v1/"
 
 const filters = [
     {
-        name: "Style",
-        options: ["Apple", "Samsung", "Sony", "LG"],
+        name: "Variation",
+        type: "checkbox",
+        options: ["Original", "Anime", "Games", "Misc"],
     },
     {
         name: "Price range",
+        type: "radio",
         options: ["Under $10", "Under $25", "$25 - $50", "Under $25"],
+    },
+    {
+        name: "Size",
+        type: "checkbox",
+        options: ["1.5x1.5", "2x2", "3x3", "4x4"],
     },
 
 ]
 
 const Shop = () => {
-    const handleProductClick = (product) => {
-        setSelectedProduct(product)
-    }
-    const onClose = () => {
-        setSelectedProduct(null)
-    }
+
     const [products, setProducts] = useState([
         {
             id: 1,
@@ -67,7 +69,7 @@ const Shop = () => {
 
         const fetchProducts = async () => {
             try {
-                const response = await axios.get(API_URL + "products");
+                const response = await axios.get(API_URL + "products/with_default");
 
                 setProducts(response.data);
                 console.log(response.data)
@@ -81,10 +83,15 @@ const Shop = () => {
         fetchProducts();
     }, []);
     const handleFilterChange = (filter) => {
-        // Handle filter change
+
         console.log(filter);
     };
-
+    const handleProductClick = (product) => {
+        setSelectedProduct(product)
+    }
+    const onClose = () => {
+        setSelectedProduct(null)
+    }
     const getProductImage = (id) => {
         return "http://127.0.0.1:8000/media/images/8357566.jpg"
 
@@ -93,19 +100,22 @@ const Shop = () => {
         if (!loading) {
             return (
                 <div>
-
-
                     <div className="products-grid">
-                        {filteredProducts.map((product) => (
+                        {filteredProducts.map((product) => {
+                            if(product.default_sku && !product.deleted_at){
+                                return(
 
-                            <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
-                                <img src={getProductImage(1)} alt={product.name}/>
-                                {// TODO: add proper image fetching functionality
-                                }
-                                <h3>{product.name}</h3>
-                                {/*<p>${product.price}</p>*/}
-                            </div>
-                        ))}
+                                    <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
+                                        <img src={getProductImage(1)} alt={product.name}/>
+                                        {// TODO: add proper image fetching functionality
+                                        }
+                                        <h3>{product.name}</h3>
+                                        {/*<p>${product.price}</p>*/}
+                                    </div>
+                                )
+                            }
+                            }
+                        )}
                     </div>
                 </div>
             )
@@ -137,7 +147,7 @@ const Shop = () => {
                     <div className="modal-container" onClick={(e) => e.stopPropagation()}>
                         <span className="modal-close" onClick={onClose}>&times;</span>
 
-                        <ProductDetail product={selectedProduct}/>
+                        <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku}/>
                     </div>
                 </div>
             }
@@ -151,7 +161,7 @@ const Shop = () => {
                     <div className={"shop-sidebar"}>
                         {getSideBarContent()}
                     </div>
-                    {getPageContent()}
+                    {!loading && getPageContent()}
 
                 </div>
             </div>
