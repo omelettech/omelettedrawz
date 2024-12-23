@@ -112,4 +112,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
+
+
+}
+
+.product-variation{
+  border: 1px solid red;
+  width: fit-content;
+    padding: 0.1rem 1rem;
+
 }

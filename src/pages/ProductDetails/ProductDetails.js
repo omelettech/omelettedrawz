@@ -31,7 +31,9 @@ const ProductDetail = ({product, productSku}) => {
                     onClick={() => {setCurrentVariation(sku)}}
 
                 >
-                    <p>{sku.sku}</p>
+                    <div className="product-variation">
+                        <small>{sku.size_attribute_value}</small>
+                    </div>
 
                 </div>
             )
