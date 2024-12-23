@@ -12,7 +12,7 @@ const API_URL = "http://127.0.0.1:8000/products/v1/"
 
 const filters = [
     {
-        name: "Variation",
+        name: "Category",
         type: "checkbox",
         options: ["Original", "Anime", "Games", "Misc"],
     },

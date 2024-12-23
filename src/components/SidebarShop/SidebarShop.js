@@ -19,11 +19,11 @@ const SidebarShop = ({categories, filters, onFilterChange}) => {
             </div>
 
             <div className="sidebar-content">
-                <div className="sidebar-section">
-                    <h4>Categories</h4>
-                    <ul>
+                <div className="filter-group">
+                    <h4>Type</h4>
+
                         {categories.map((category, index) => (
-                            <li key={index}>
+                            <div key={index}>
                                 <label>
                                     <input
                                         type="checkbox"
@@ -32,9 +32,9 @@ const SidebarShop = ({categories, filters, onFilterChange}) => {
                                     />
                                     {category}
                                 </label>
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+
                 </div>
 
                 <div className="sidebar-section">
