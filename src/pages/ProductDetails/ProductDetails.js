@@ -28,11 +28,14 @@ const ProductDetail = ({product, productSku}) => {
             return (
                 <div
                     key={sku.id}
-                    onClick={() => {setCurrentVariation(sku)}}
+                    onClick={() => {
+                        setCurrentVariation(sku)
+                    }}
 
                 >
-                    <div className="product-variation">
-                        <small>{sku.size_attribute_value}</small>
+                    <div
+                        className={`product-variation ${currentVariation.id === sku.id ? "selected" : "not-selected"}`}>
+                        <p>{sku.size_attribute_value || "Variation"}</p>
                     </div>
 
                 </div>
@@ -43,20 +46,52 @@ const ProductDetail = ({product, productSku}) => {
 
     return (
         <div className="product-detail-container">
-            <h2 className="product-title">{product.name}</h2>
-            <img src={product.image} alt={product.name} className="product-detail-image"/>
-            <p className="product-description">{product.description}</p>
-
-
-            <p className="product-price">price: ${currentVariation.price}</p>
-            <p className="product-price">qty:{currentVariation.quantity}</p>
-
-            <div className="product-attributes">
-                {ListOfVariations ? getVariations() : <p>Loading</p>}
+            <div className={"product-detail-image-container"}>
+                {/*<img src={product.image} alt={product.name} className="product-detail-image"/>*/}
+                <img src={"http://127.0.0.1:8000/media/images/8357566.jpg"} alt={product.name}
+                     className="product-detail-image"/>
             </div>
+            <div className="product-detail-info">
+                <h2 className="product-title">{product.name}</h2>
 
-            <button className="add-to-cart-button">Add to Cart</button>
+                <div>
+                    <small>Description:</small>
+                    <p className="product-description">{product.description}</p>
+                </div>
 
+                <div style={{display: "flex", gap: 50}}>
+
+                    <div>
+                        <small>Category:</small>
+                        <p className={"product-description"}>{product.category}</p>
+
+                    </div>
+                    <div>
+                        <small>Summary:</small>
+                        <p className="product-description">{product.summary}</p>
+
+                    </div>
+
+                </div>
+
+                <div>
+                    <small>Price:</small>
+                    <h3 className="product-price" style={{marginTop: 0}}>${currentVariation.price}</h3>
+
+                </div>
+
+                <div>
+                    <small>In stock: {currentVariation.quantity}</small>
+                    <br></br>
+                    <input type="number" min={1} max={currentVariation.quantity} defaultValue={1}/>
+                </div>
+
+                <div className="product-attributes">
+                    {ListOfVariations ? getVariations() : <small>No variations</small>}
+                </div>
+
+                <button className="add-to-cart-button">Add to Cart</button>
+            </div>
             {/* Recommendations Section */}
 
         </div>

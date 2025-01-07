@@ -31,36 +31,7 @@ const filters = [
 
 const Shop = () => {
 
-    const [products, setProducts] = useState([
-        {
-            id: 1,
-            name: 'Sticker Pack 1',
-            price: 5.99,
-            category: 'Stickers',
-            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
-        },
-        {
-            id: 2,
-            name: 'Art Print 1',
-            price: 12.99,
-            category: 'Prints',
-            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
-        },
-        {
-            id: 3,
-            name: 'Sticker Pack 2',
-            price: 4.99,
-            category: 'Stickers',
-            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
-        },
-        {
-            id: 4,
-            name: 'Art Print 2',
-            price: 16.99,
-            category: 'Prints',
-            image: '/static/media/image2.2afdf2e7a647b3e0e510.png'
-        },
-    ]);
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -70,7 +41,6 @@ const Shop = () => {
         const fetchProducts = async () => {
             try {
                 const response = await axios.get(API_URL + "products/with_default");
-
                 setProducts(response.data);
                 console.log(response.data)
                 setLoading(false);
@@ -110,7 +80,7 @@ const Shop = () => {
                                         {// TODO: add proper image fetching functionality
                                         }
                                         <h3>{product.name}</h3>
-                                        {/*<p>${product.price}</p>*/}
+                                        <p className={"price-tag"}>${product.default_sku.price.toFixed(2)}</p>
                                     </div>
                                 )
                             }

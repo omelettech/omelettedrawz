@@ -1,10 +1,11 @@
 :root {
     --primary-color: #FFA45B;
-    --secondary-color: #FFDA77;
+    --secondary-color: #c2804c;
+    --accent-color: #236aef;
     --background-color: #FBF6F0;
     --text-color: #161618;
 
-    --button-background-color: #333;
+    --button-background-color: #d21515;
     --button-text-color: #F6F1E9;
     --button-hover-background-color: #000;
 
@@ -25,7 +26,7 @@
     --font-h1: 'SuperFortress', sans-serif;
     --font-h2: 'Bangers', sans-serif;
     --font-h3: 'Bangers', sans-serif;
-    --font-body: 'Bromine', sans-serif;
+    --font-body: 'SuperFortress', sans-serif;
     --font-small: 'Bromine', sans-serif;
     --font-btn: 'SuperFortress', sans-serif;
 
@@ -36,6 +37,8 @@ body[data-theme='dark'] {
     --text-color: #f5f5f5;
     --primary-color: #ff4646;
     --secondary-color: #ccc;
+    --accent-color: #EEDF7A;
+
 
     --card-background: #444;
     --card-shadow: rgba(0, 0, 0, 0.5);
@@ -49,15 +52,11 @@ body[data-theme='dark'] {
     --dropdown-hover-bg: #555;
     --dropdown-hover-color: #64b5f6;
 
-
-}
-
-
-body[data-theme='dark'] {
     margin-top: 60px;
     background-color: var(--background-color);
-
 }
+
+
 
 body[data-theme='light'] {
     margin-top: 60px;
@@ -118,13 +117,14 @@ h3 {
 
 p {
     font-family: var(--font-body);
-    font-size: 1.5rem;
+    font-size: 1rem;
     line-height: 1.6;
+    letter-spacing: 1pt;
 }
 
 button {
     font-family: var(--font-btn);
-    font-size: 1rem;
+    font-size: 1.5rem;
     letter-spacing: 1pt;
 }
 
@@ -154,8 +154,10 @@ h1, h2, h3, p, small {
 footer {
     bottom: 0;
     position: static;
-    width: 100%;
-    margin: auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
 
 }
