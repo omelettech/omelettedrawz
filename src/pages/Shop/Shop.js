@@ -52,8 +52,20 @@ const Shop = () => {
                 setLoading(false);
             }
         };
-
+        const fetchFeaturedProducts = async () => {
+            try {
+                const response = await axios.get(API_URL + "products/featured");
+                setFeaturedProducts(response.data);
+                console.log(response.data)
+                setLoading(false);
+            }
+            catch (error) {
+                console.error('Error fetching products:', error);
+                setLoading(false);
+            }
+        }
         fetchProducts();
+        fetchFeaturedProducts();
     }, []);
     const handleFilterChange = (filter) => {
 
@@ -108,6 +120,7 @@ const Shop = () => {
     }
 
     const getFeaturedContent = () => {
+        console.log("featured products", featuredProducts)
         return(
             <div className="products-grid">
                 {featuredProducts.map((product) => {
@@ -143,7 +156,6 @@ const Shop = () => {
                     {/*    {getSideBarContent()}*/}
                     {/*</div>*/}
                     {!loading && getFeaturedContent()}
-
                 </div>
             </div>
             <div>
