@@ -6,6 +6,7 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductDetail from "../ProductDetails/ProductDetails";
+ import ProductCard from "./ProductCard";
 
 const API_URL = "http://127.0.0.1:8000/products/v1/"
 
@@ -36,6 +37,8 @@ const Shop = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedProduct, setSelectedProduct] = useState(null)
+    const [featuredProducts, setFeaturedProducts] = useState([])
+
     useEffect(() => {
 
         const fetchProducts = async () => {
@@ -72,18 +75,12 @@ const Shop = () => {
                 <div>
                     <div className="products-grid">
                         {filteredProducts.map((product) => {
-                            if(product.default_sku && !product.deleted_at){
-                                return(
+                                if (product.default_sku && !product.deleted_at) {
+                                    return (
 
-                                    <div key={product.id} className="product-card" onClick={() => handleProductClick(product)}>
-                                        <img src={getProductImage(1)} alt={product.name}/>
-                                        {// TODO: add proper image fetching functionality
-                                        }
-                                        <h3>{product.name}</h3>
-                                        <p className={"price-tag"}>${product.default_sku.price.toFixed(2)}</p>
-                                    </div>
-                                )
-                            }
+                                       <ProductCard product={product} onClick={() => handleProductClick(product)} getImageSourceCallback={getProductImage(1)}></ProductCard>
+                                    )
+                                }
                             }
                         )}
                     </div>
@@ -110,6 +107,20 @@ const Shop = () => {
         )
     }
 
+    const getFeaturedContent = () => {
+        return(
+            <div className="products-grid">
+                {featuredProducts.map((product) => {
+                        if (product.default_sku && !product.deleted_at) {
+                            return (
+                                <ProductCard product={product} onClick={() => handleProductClick(product)} getImageSourceCallback={getProductImage(1)}></ProductCard>
+                            )
+                        }
+                    }
+                )}
+            </div>
+        )
+    };
     return (
         <>
             {selectedProduct &&
@@ -128,11 +139,20 @@ const Shop = () => {
                 <SectionHeading text={"Artist picks"} align={"center"}></SectionHeading>
 
                 <div className="shop-container">
+                    {/*<div className={"shop-sidebar"}>*/}
+                    {/*    {getSideBarContent()}*/}
+                    {/*</div>*/}
+                    {!loading && getFeaturedContent()}
+
+                </div>
+            </div>
+            <div>
+                <SectionHeading text={"All products"} align={"center"}></SectionHeading>
+                <div className="shop-container">
                     <div className={"shop-sidebar"}>
                         {getSideBarContent()}
                     </div>
                     {!loading && getPageContent()}
-
                 </div>
             </div>
         </>
