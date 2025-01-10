@@ -6,9 +6,8 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductDetail from "../ProductDetails/ProductDetails";
- import ProductCard from "./ProductCard";
-
-const API_URL = "http://127.0.0.1:8000/products/v1/"
+import ProductCard from "./ProductCard";
+import {fetchFeaturedProducts, fetchProducts} from "../../services/ProductService";
 
 
 const filters = [
@@ -41,32 +40,22 @@ const Shop = () => {
 
     useEffect(() => {
 
-        const fetchProducts = async () => {
-            try {
-                const response = await axios.get(API_URL + "products/with_default");
-                setProducts(response.data);
-                console.log(response.data)
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching products:', error);
-                setLoading(false);
-            }
-        };
-        const fetchFeaturedProducts = async () => {
-            try {
-                const response = await axios.get(API_URL + "products/featured");
-                setFeaturedProducts(response.data);
-                console.log(response.data)
-                setLoading(false);
-            }
-            catch (error) {
-                console.error('Error fetching products:', error);
-                setLoading(false);
-            }
-        }
-        fetchProducts();
-        fetchFeaturedProducts();
+        fetchProducts().then((data) => {
+            setProducts(data)
+        }).catch((error) => {
+            console.error('Error fetching products:', error);
+        }).finally(() => {
+            setLoading(false)
+        })
+
+        fetchFeaturedProducts().then((data) => {
+            setFeaturedProducts(data)
+        }).catch((err) => {
+            console.error('Error fetching featured products:', err);
+        }).finally(() => setLoading(false))
     }, []);
+
+
     const handleFilterChange = (filter) => {
 
         console.log(filter);
@@ -90,7 +79,8 @@ const Shop = () => {
                                 if (product.default_sku && !product.deleted_at) {
                                     return (
 
-                                       <ProductCard product={product} onClick={() => handleProductClick(product)} getImageSourceCallback={getProductImage(1)}></ProductCard>
+                                        <ProductCard product={product} onClick={() => handleProductClick(product)}
+                                                     getImageSourceCallback={getProductImage(1)}></ProductCard>
                                     )
                                 }
                             }
@@ -121,12 +111,13 @@ const Shop = () => {
 
     const getFeaturedContent = () => {
         console.log("featured products", featuredProducts)
-        return(
+        return (
             <div className="products-grid">
                 {featuredProducts.map((product) => {
                         if (product.default_sku && !product.deleted_at) {
                             return (
-                                <ProductCard product={product} onClick={() => handleProductClick(product)} getImageSourceCallback={getProductImage(1)}></ProductCard>
+                                <ProductCard product={product} onClick={() => handleProductClick(product)}
+                                             getImageSourceCallback={getProductImage(1)}></ProductCard>
                             )
                         }
                     }
@@ -158,13 +149,18 @@ const Shop = () => {
                     {!loading && getFeaturedContent()}
                 </div>
             </div>
+
             <div>
                 <SectionHeading text={"All products"} align={"center"}></SectionHeading>
                 <div className="shop-container">
                     <div className={"shop-sidebar"}>
                         {getSideBarContent()}
                     </div>
-                    {!loading && getPageContent()}
+                    {
+                        (!loading && getPageContent())
+                        ||
+                        <div>Loading</div>
+                    }
                 </div>
             </div>
         </>
