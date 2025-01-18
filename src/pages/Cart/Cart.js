@@ -1,8 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./Cart.css"
 import {useNavigate} from "react-router-dom";
 import BodyCard from "../../components/ProductCard/BodyCard";
 import Popup from "../../components/Popup/Popup";
+import axios from "axios";
+import {fetchCart} from "../../services/OrderServices";
+import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
+import {test_auth} from "../../services/apiClient";
 // Sample cart data
 const sampleCartItems = [
     {
@@ -22,7 +26,7 @@ const sampleCartItems = [
         name: "Patch B",
         price: 5.0,
         quantity: 1,
-    },{
+    }, {
         id: 4,
         name: "Patch B",
         price: 5.0,
@@ -31,8 +35,20 @@ const sampleCartItems = [
 ];
 
 const CartPage = () => {
-    const [cartItems, setCartItems] = useState(sampleCartItems);
+    const [cartItems, setCartItems] = useState(null);
     const [displayPopup, setDisplayPopup] = useState(false);
+    const [Error, setError] = useState(null)
+    let updateTimer;
+
+    const getCartData = async () => {
+        try {
+            const cart_data = await fetchCart()
+            setCartItems(cart_data[0].cartitem_set)
+        } catch (e) {
+            console.error(e)
+            setError("ASDKHASD")
+        }
+    }
 
     const handleQuantityChange = (id, newQuantity) => {
         setCartItems((prevItems) =>
@@ -40,6 +56,17 @@ const CartPage = () => {
                 item.id === id ? {...item, quantity: newQuantity} : item
             )
         );
+        // Clear the existing timer if it exists
+        if (updateTimer) {
+            clearTimeout(updateTimer);
+        }
+
+        // Start a new timer for 2 seconds
+        updateTimer = setTimeout(() => {
+            // Call the backend API to update the quantity
+            // updateQuantityOnBackend(id, newQuantity);
+            console.log("Update qty request sent", newQuantity)
+        }, 2000);
     };
 
     const handleRemoveItem = (id) => {
@@ -52,63 +79,81 @@ const CartPage = () => {
     }
 
     const getTotalPrice = () => {
-        return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+        return cartItems.reduce((total, item) => {
+            return total + item.price * item.quantity
+        })
     };
+
+    useEffect(() => {
+        getCartData()
+    }, [])
+
 
 
     const navigate = useNavigate()
+    if (!Error) {
+        return (
+            <div className={"cart-container"}>
+                <h1>Your Cart</h1>
+                <br/>
+                <hr/>
+                <br/>
 
-    return (
-        <div className={"cart-container"}>
-            <h1>Your Cart</h1>
-            <br/>
-            <hr/>
-            <br/>
+                {!cartItems || cartItems.length === 0 ? (
+                    <p>Your cart is empty.</p>
+                ) : (
+                    <div>
 
-            {cartItems.length === 0 ? (
-                <p>Your cart is empty.</p>
-            ) : (
-                <div>
-                    {cartItems.map((item) => (
-                        <div key={item.id} className={'cart-item'} >
-                            {displayPopup && <Popup onClickBG={()=>setDisplayPopup(false)}>
-                                <p>Are you sure</p>
-                                <button className={"btn secondary"} onClick={()=>RemoveItem(item.id)}>Yes</button>
-                                <button className={"btn primary"} onClick={() => {
-                                    setDisplayPopup(false)
-                                }}>No
+                        {cartItems.map((item) => (
+                            <div key={item.id} className={'cart-item'}>
+                                {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
+                                    <p>Are you sure</p>
+                                    <button className={"btn secondary"} onClick={() => RemoveItem(item.id)}>Yes</button>
+                                    <button className={"btn primary"} onClick={() => {
+                                        setDisplayPopup(false)
+                                    }}>No
+                                    </button>
+
+                                </Popup>}
+                                <h2>{item.name}</h2>
+                                <p>Price: ${item.price}</p>
+                                <label>
+                                    Qty:
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        value={item.quantity}
+                                        onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                                    />
+                                </label>
+                                <p>Total: ${(item.price * item.quantity)}</p>
+                                <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>Remove
                                 </button>
+                            </div>
 
-                            </Popup>}
-                            <h2>{item.name}</h2>
-                            <p>Price: ${item.price.toFixed(2)}</p>
-                            <label>
-                                Qty:
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={item.quantity}
-                                    onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                                />
-                            </label>
-                            <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
-                            <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>Remove</button>
+                        ))}
+
+
+                        <div align={"right"}>
+                            <h3 style={{fontFamily: "sans-serif"}}>Total Price: ${getTotalPrice()}</h3>
+                            <button className="btn primary" style={{padding: "10px 20px", marginTop: "20px"}}>
+                                Checkout
+                            </button>
                         </div>
+                        <br/>
+                        <hr/>
 
-                    ))}
-                    <div align={"right"}>
-                        <h3 style={{fontFamily:"sans-serif"}}>Total Price: ${getTotalPrice()}</h3>
-                        <button className="btn primary" style={{padding: "10px 20px", marginTop: "20px"}}>
-                            Checkout
-                        </button>
                     </div>
-                    <br/>
-                    <hr/>
+                )}
+            </div>
+        );
+    } else {
+        return <div>
+            <SectionHeading text={"Error"} align={"center"}/>
+            <button onClick={test_auth}>TEST</button>
 
-                </div>
-            )}
         </div>
-    );
+    }
 };
 
 export default CartPage;
