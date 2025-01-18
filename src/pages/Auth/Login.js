@@ -3,23 +3,29 @@ import './Login.css';
 import {Link, useNavigate} from 'react-router-dom'
 import {auth} from '../../config/firebase';
 import {signInWithEmailAndPassword} from 'firebase/auth';
-import {AuthContext} from '../../context/AuthContext';
+import {AuthContext, useAuth} from '../../context/AuthContext';
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 import g_logo from "../../assets/images/google_logo.png"
+import axios from "axios";
+import {login} from "../../services/apiClient";
 
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const {currentUser} = useContext(AuthContext);
+    const {updateToken,updateCurrentUser} = useAuth()
     const navigate = useNavigate(); // Initialize useHistory
 
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            navigate('/')
+            const response = await login(email,password)
+            if (response)
+            {
+                updateToken(response.access)
+                updateCurrentUser(response.user)
+            }
         } catch (err) {
             setError(err.message);
         }
@@ -48,12 +54,11 @@ function SignIn() {
         }}>
             <div className="form-container">
                 <h2 className="signin-title">Sign In</h2>
-                {currentUser && <p>Welcome back, {currentUser.email}</p>}
                 {error && <p className="signin-error">{error}</p>}
                 <form className="signin-form" onSubmit={handleSignIn}>
                     <input
-                        type="email"
-                        placeholder="Email"
+                        type="text"
+                        placeholder="Username"
                         className="signin-input"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}

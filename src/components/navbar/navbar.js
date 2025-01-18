@@ -1,14 +1,14 @@
 import React, {useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {auth} from "../../config/firebase";
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext, useAuth} from "../../context/AuthContext";
 import './navbar.css';
 import logo from '../../assets/images/logo.png';
 import logoHover from '../../assets/images/logo-hover.png';
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher"; // Your second image
 
 const Navbar = () => {
-        const {currentUser} = useContext(AuthContext);
+        const {currentUser} = useAuth();
         const [isOpen, setIsOpen] = useState(false);
         const navigate = useNavigate()
         const toggleDropdown = () => {
@@ -35,6 +35,7 @@ const Navbar = () => {
 
     return (
             <div className={`navbar dark`}>
+                <div>{currentUser?.username}</div>
                 <div className="navbar-start" onClick={()=>navigate("/")}>
                     <div className="logo-container">
                         <img src={logo} alt="Logo" className="logo"/>
