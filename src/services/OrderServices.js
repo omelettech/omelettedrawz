@@ -1,0 +1,13 @@
+import axios from "axios";
+import {BASE_URL} from "./apiClient";
+export const API_URL = BASE_URL+"orders/"
+
+export const fetchCart= async ()=>{
+    try{
+        const res =await axios.get(API_URL+"v1/cart/")
+        // console.log(res.data)
+        return res.data
+    }catch (e){
+        throw e
+    }
+}
