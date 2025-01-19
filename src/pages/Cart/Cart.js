@@ -8,31 +8,6 @@ import {fetchCart} from "../../services/OrderServices";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import {test_auth} from "../../services/apiClient";
 // Sample cart data
-const sampleCartItems = [
-    {
-        id: 1,
-        name: "Sticker A",
-        price: 2.5,
-        quantity: 2,
-    },
-    {
-        id: 2,
-        name: "Patch B",
-        price: 5.0,
-        quantity: 1,
-    },
-    {
-        id: 3,
-        name: "Patch B",
-        price: 5.0,
-        quantity: 1,
-    }, {
-        id: 4,
-        name: "Patch B",
-        price: 5.0,
-        quantity: 1,
-    },
-];
 
 const CartPage = () => {
     const [cartItems, setCartItems] = useState(null);
@@ -43,7 +18,9 @@ const CartPage = () => {
     const getCartData = async () => {
         try {
             const cart_data = await fetchCart()
-            setCartItems(cart_data[0].cartitem_set)
+            const [{cartitem_set}] = cart_data
+            console.log(cartitem_set)
+            setCartItems(cartitem_set)
         } catch (e) {
             console.error(e)
             setError("ASDKHASD")
@@ -74,14 +51,15 @@ const CartPage = () => {
     };
 
     const RemoveItem = (id) => {
-        return setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+        // return setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
 
     }
 
     const getTotalPrice = () => {
-        return cartItems.reduce((total, item) => {
-            return total + item.price * item.quantity
-        })
+        return cartItems.reduce(
+            (total,item) => total + (item.product_sku_price*item.quantity),
+            0,
+        )
     };
 
     useEffect(() => {
@@ -104,34 +82,37 @@ const CartPage = () => {
                 ) : (
                     <div>
 
-                        {cartItems.map((item) => (
-                            <div key={item.id} className={'cart-item'}>
-                                {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
-                                    <p>Are you sure</p>
-                                    <button className={"btn secondary"} onClick={() => RemoveItem(item.id)}>Yes</button>
-                                    <button className={"btn primary"} onClick={() => {
-                                        setDisplayPopup(false)
-                                    }}>No
+                        {cartItems.map((item) => {
+                            return (
+                                <div key={item.id} className={'cart-item'}>
+                                    {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
+                                        <p>Are you sure</p>
+                                        <button className={"btn secondary"} onClick={() => RemoveItem(item.id)}>Yes
+                                        </button>
+                                        <button className={"btn primary"} onClick={() => {
+                                            setDisplayPopup(false)
+                                        }}>No
+                                        </button>
+
+                                    </Popup>}
+                                    <h2>{item.name}</h2>
+                                    <p>Price: ${item.product_sku_price}</p>
+                                    <label>
+                                        Qty:
+                                        <input
+                                            type="number"
+                                            min="1"
+                                            value={item.quantity}
+                                            onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                                        />
+                                    </label>
+                                    <p>Total: ${(item.product_sku_price * item.quantity)}</p>
+                                    <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>Remove
                                     </button>
+                                </div>
+                            )
 
-                                </Popup>}
-                                <h2>{item.name}</h2>
-                                <p>Price: ${item.price}</p>
-                                <label>
-                                    Qty:
-                                    <input
-                                        type="number"
-                                        min="1"
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                                    />
-                                </label>
-                                <p>Total: ${(item.price * item.quantity)}</p>
-                                <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>Remove
-                                </button>
-                            </div>
-
-                        ))}
+                        })}
 
 
                         <div align={"right"}>
