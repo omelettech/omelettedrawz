@@ -1,29 +1,54 @@
 import React, {useContext, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {auth} from "../../config/firebase";
 import {AuthContext, useAuth} from "../../context/AuthContext";
 import './navbar.css';
 import logo from '../../assets/images/logo.png';
 import logoHover from '../../assets/images/logo-hover.png';
-import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher"; // Your second image
+import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher";
+import axios from "axios";
+import {BASE_URL, getCSRFToken} from "../../services/apiClient"; // Your second image
 
 const Navbar = () => {
-        const {currentUser} = useAuth();
+        const {currentUser,token} = useAuth();
         const [isOpen, setIsOpen] = useState(false);
         const navigate = useNavigate()
+        const {logout} = useAuth()
         const toggleDropdown = () => {
+            console.log(currentUser)
             setIsOpen(!isOpen);
         };
 
+        //TODO: Temporary
+        const displayUserProperties=()=>{
+            console.log(
+                `User profile: ${currentUser}\n Token: ${token}`)
+        }
+
         const handleLogout = async () => {
             try {
-                await auth.signOut();
-                navigate("/")
-            } catch (error) {
-                console.error('Error logging out:', error);
-            } finally {
-                setIsOpen(false)
+                await logout()
+            }catch (e){
+                console.error("Error logging out. just log back in")
+                navigate("/login")
             }
+
+            // try{
+            //     console.log("trying logout",token)
+            //     const response =await axios.post(BASE_URL+"users/v1/dj-rest-auth/logout/",{
+            //         headers: {
+            //             'Authorization': `Bearer ${token}`,
+            //             'Content-Type': 'application/json',
+            //
+            //         }}
+            //     )
+            //     if (response.status>200 && response.status<=300){
+            //         console.log("success")
+            //     }
+            //
+            //     console.log(response)
+            // }catch (e){
+            //     console.error(e)
+            // }
 
         };
 
@@ -35,7 +60,8 @@ const Navbar = () => {
 
     return (
             <div className={`navbar dark`}>
-                <div>{currentUser?.username}</div>
+                {console.log("Username:",JSON.stringify(currentUser),"token",token)}
+                {currentUser && <div>{currentUser.username}</div>}
                 <div className="navbar-start" onClick={()=>navigate("/")}>
                     <div className="logo-container">
                         <img src={logo} alt="Logo" className="logo"/>
@@ -102,6 +128,11 @@ const Navbar = () => {
                                 </li>
                                 {currentUser && <li><Link to="/contact">Profile</Link></li>}
                                 <li><Link to="/contact">Contact</Link></li>
+
+                                <li>
+                                    <button onClick={displayUserProperties}></button>
+                                </li>
+
                                 {currentUser ?
                                     <li onClick={handleLogout}><Link to={"/"}>Logout</Link></li>
                                     : <li onClick={handleLogin}><Link to={"/login"}>Login</Link></li>}

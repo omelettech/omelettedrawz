@@ -7,27 +7,29 @@ import {AuthContext, useAuth} from '../../context/AuthContext';
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 import g_logo from "../../assets/images/google_logo.png"
 import axios from "axios";
-import {login} from "../../services/apiClient";
 
 function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const {updateToken,updateCurrentUser} = useAuth()
+    const {updateCurrentUser,login} = useAuth()
     const navigate = useNavigate(); // Initialize useHistory
 
 
     const handleSignIn = async (e) => {
         e.preventDefault();
         try {
-            const response = await login(email,password)
-            if (response)
-            {
-                updateToken(response.access)
-                updateCurrentUser(response.user)
+            // console.log(email,password)
+            const confirmation = await login(email,password)
+
+            if(confirmation){
+                console.log("Login confirmed")
+            }else{
+                setError("Unsuccessful attempt")
             }
+
         } catch (err) {
-            setError(err.message);
+            console.error(err.message);
         }
     };
     const handleGoogleLogin = async (e) => {
