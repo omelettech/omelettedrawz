@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {AuthContext} from "../../context/AuthContext";
+import {AuthContext, useAuth} from "../../context/AuthContext";
 import bg from '../../assets/images/image1.png'
 import red_guy from '../../assets/images/red guy2.png'
 import {useNavigate} from 'react-router-dom'
@@ -11,9 +11,8 @@ import BodyCard from "../../components/ProductCard/BodyCard";
 
 const Home = () => {
     const navigate = useNavigate(); // Initialize useHistory
-    const {currentUser} = useContext(AuthContext)
-        console.log(currentUser)
-
+    const {currentUser} = useAuth()
+    
     return (
         <>
 

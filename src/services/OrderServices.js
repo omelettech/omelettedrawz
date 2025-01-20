@@ -1,5 +1,5 @@
-import axios from "axios";
 import {BASE_URL} from "./apiClient";
+import axios from "../context/AxiosInstance";
 export const API_URL = BASE_URL+"orders/"
 
 export const fetchCart= async ()=>{
