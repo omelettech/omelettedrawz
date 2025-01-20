@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import "./Cart.css"
 import {useNavigate} from "react-router-dom";
-import BodyCard from "../../components/ProductCard/BodyCard";
 import Popup from "../../components/Popup/Popup";
-import axios from "axios";
 import {fetchCart} from "../../services/OrderServices";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import {test_auth} from "../../services/apiClient";

@@ -13,6 +13,7 @@ import {useContext, useState} from "react";
 import Cart from "./pages/Cart/Cart";
 import ComingSoon from "./pages/ComingSoon";
 import SmartForm from "./components/SmartForm/SmartForm";
+import {Checkout} from "./pages/Cart/CheckoutPage";
 
 function App() {
     document.body.setAttribute('data-theme', 'dark');
@@ -32,6 +33,7 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path={"/cart"} element={<Cart/>}></Route>
                     <Route path={'/forms'} element={<SmartForm></SmartForm>}></Route>
+                    <Route path={'/checkout'} element={<Checkout></Checkout>}></Route>
 
                 </Routes>
                 <div className={"cart-btn"}>

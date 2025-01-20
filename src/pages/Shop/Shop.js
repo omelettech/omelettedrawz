@@ -110,13 +110,12 @@ const Shop = () => {
     }
 
     const getFeaturedContent = () => {
-        console.log("featured products", featuredProducts)
         return (
             <div className="products-grid">
                 {featuredProducts.map((product) => {
                         if (product.default_sku && !product.deleted_at) {
                             return (
-                                <ProductCard product={product} onClick={() => handleProductClick(product)}
+                                <ProductCard key={product.id} product={product} onClick={() => handleProductClick(product)}
                                              getImageSourceCallback={getProductImage(1)}></ProductCard>
                             )
                         }
