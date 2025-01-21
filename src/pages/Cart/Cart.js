@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "./Cart.css"
 import {useNavigate} from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
-import {fetchCart} from "../../services/OrderServices";
+import {DeleteCartItem, fetchCart} from "../../services/OrderServices";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import {test_auth} from "../../services/apiClient";
 // Sample cart data
@@ -10,6 +10,7 @@ import {test_auth} from "../../services/apiClient";
 const CartPage = () => {
     const [cartItems, setCartItems] = useState(null);
     const [displayPopup, setDisplayPopup] = useState(false);
+    const [selectedCartItemId, setSelectedCartItemId] = useState(null)
     const [Error, setError] = useState(null)
     let updateTimer;
 
@@ -45,17 +46,28 @@ const CartPage = () => {
     };
 
     const handleRemoveItem = (id) => {
+        // still didnt confirm
+        setSelectedCartItemId(id)
         setDisplayPopup(true);
     };
 
-    const RemoveItem = (id) => {
-        // return setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    const RemoveItem = async (id) => {
+        try {
+            const response = await DeleteCartItem(id)
+            setSelectedCartItemId(null)
+            setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
+            console.log(response.data)
+        } catch (e) {
+            console.error(e)
+        }finally {
+            setDisplayPopup(false)
 
+        }
     }
 
     const getTotalPrice = () => {
         return cartItems.reduce(
-            (total,item) => total + (item.product_sku_price*item.quantity),
+            (total, item) => total + (item.product_sku_price * item.quantity),
             0,
         )
     };
@@ -65,6 +77,15 @@ const CartPage = () => {
     }, [])
 
 
+
+    useEffect(()=>{
+        if(!displayPopup){
+            setSelectedCartItemId(null)
+        }else if (!selectedCartItemId){
+            //this means that it was deleted
+            getCartData()
+        }
+    },[displayPopup])
 
     const navigate = useNavigate()
     if (!Error) {
@@ -85,7 +106,8 @@ const CartPage = () => {
                                 <div key={item.id} className={'cart-item'}>
                                     {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
                                         <p>Are you sure</p>
-                                        <button className={"btn secondary"} onClick={() => RemoveItem(item.id)}>Yes
+                                        <button className={"btn secondary"} onClick={() => RemoveItem(selectedCartItemId)}>
+                                            Yes
                                         </button>
                                         <button className={"btn primary"} onClick={() => {
                                             setDisplayPopup(false)
@@ -105,7 +127,8 @@ const CartPage = () => {
                                         />
                                     </label>
                                     <p>Total: ${(item.product_sku_price * item.quantity)}</p>
-                                    <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>Remove
+                                    <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>
+                                        Remove
                                     </button>
                                 </div>
                             )

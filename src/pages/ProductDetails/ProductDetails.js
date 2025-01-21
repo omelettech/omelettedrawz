@@ -22,13 +22,13 @@ const ProductDetail = ({product, productSku}) => {
         }
     }
 
-    const addToCart=async (product_sku,quantity)=>{
+    const addToCart = async (product_sku, quantity) => {
         setLoading(true)
         try {
             const response = await PostAddToCart(product_sku, quantity)
             console.log()
         } catch (e) {
-            if(e.status===200){
+            if (e.status === 200) {
                 //request went through, business error
                 setError(e.message)
             }
@@ -111,15 +111,18 @@ const ProductDetail = ({product, productSku}) => {
                 <div>
                     <small>In stock: {currentVariation.quantity}</small>
                     <br></br>
-                    <input type="number" min={1} max={currentVariation.quantity} defaultValue={1} ref={qtyRef} onChange={handleQuantity}/>
+                    <input type="number" min={1} max={currentVariation.quantity} defaultValue={1} ref={qtyRef}
+                           onChange={handleQuantity}/>
                 </div>
 
                 <div className="product-attributes">
                     {ListOfVariations ? getVariations() : <small>No variations</small>}
                 </div>
 
-                <button className="add-to-cart-button" disabled={loading} onClick={() => addToCart(currentVariation.sku, qty)}>Add to
-                    Cart</button>
+                <button className="add-to-cart-button" disabled={loading}
+                        onClick={() => addToCart(currentVariation.sku, qty)}>Add to
+                    Cart
+                </button>
             </div>
             {/* Recommendations Section */}
 
