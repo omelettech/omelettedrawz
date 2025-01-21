@@ -2,11 +2,9 @@ import React, {useContext, useState} from 'react';
 import './Login.css';
 import {Link, useNavigate} from 'react-router-dom'
 import {auth} from '../../config/firebase';
-import {signInWithEmailAndPassword} from 'firebase/auth';
 import {AuthContext, useAuth} from '../../context/AuthContext';
 import {GoogleAuthProvider, signInWithPopup} from 'firebase/auth';
 import g_logo from "../../assets/images/google_logo.png"
-import axios from "axios";
 
 function SignIn() {
     const [email, setEmail] = useState('');
