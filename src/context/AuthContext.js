@@ -28,12 +28,11 @@ export const AuthProvider = ({children}) => {
 
     }
     const updateToken = (newToken) => {
+
         localStorage.setItem("token", newToken)
     }
 
-    const updateUserProfile=(newProfile)=>{
-        localStorage.setItem("profile",newProfile)
-    }
+
 
     const getUserProfile = async (token) => {
         try {
@@ -61,6 +60,7 @@ export const AuthProvider = ({children}) => {
             const response = await axios.post(BASE_URL + "users/v1/dj-rest-auth/login/", {username, password})
             if (response.status >= 200 && response.status < 300) {
                 let new_token = response.data.access
+
                 const isProfile = await getUserProfile(new_token) //returns true of false
                 if (isProfile) {
                     // Success getting profile
@@ -85,7 +85,8 @@ export const AuthProvider = ({children}) => {
         setAuthLoading(true)
         removeTokens()
         try {
-            const resp = await axios.post(BASE_URL + "users/v1/dj-rest-auth/login/")
+            const resp = await axios.post(BASE_URL + "users/v1/dj-rest-auth/logout/")
+            console.log(resp.data)
         } catch (e) {
             console.error("Error logging out")
             throw e
@@ -96,9 +97,8 @@ export const AuthProvider = ({children}) => {
     }
 
     useEffect(() => {
-        if (token && currentUser) {
+        if (token) {
             updateToken(token)
-            updateUserProfile(currentUser)
         } else {
             removeTokens()
 

@@ -60,7 +60,6 @@ const Navbar = () => {
 
     return (
             <div className={`navbar dark`}>
-                {console.log("Username:",JSON.stringify(currentUser),"token",token)}
                 {currentUser && <div>{currentUser.username}</div>}
                 <div className="navbar-start" onClick={()=>navigate("/")}>
                     <div className="logo-container">
