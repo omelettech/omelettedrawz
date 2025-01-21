@@ -1,10 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./ProductDetails.css"
 import axios from "axios";
+import {PostAddToCart} from "../../services/OrderServices";
+
 
 const ProductDetail = ({product, productSku}) => {
     const [currentVariation, setCurrentVariation] = useState(productSku)
     const [ListOfVariations, setListOfVariations] = useState(null)
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [qty, setQty] = useState(0)
+    const qtyRef = useRef(null); // Ref for the input element
+
     const fetchProductVariations = async (id) => {
         try {
             let response = await axios.get("http://127.0.0.1:8000/products/v1/product_skus/search_product/" + id)
@@ -15,6 +22,21 @@ const ProductDetail = ({product, productSku}) => {
         }
     }
 
+    const addToCart=async (product_sku,quantity)=>{
+        setLoading(true)
+        try {
+            const response = await PostAddToCart(product_sku, quantity)
+            console.log()
+        } catch (e) {
+            if(e.status===200){
+                //request went through, business error
+                setError(e.message)
+            }
+            console.error(e.message)
+        } finally {
+            setLoading(false)
+        }
+    }
 
     useEffect(() => {
         return () => {
@@ -43,6 +65,12 @@ const ProductDetail = ({product, productSku}) => {
         })
     }
 
+
+    function handleQuantity() {
+        const value = qtyRef.current.value; // Access the value of the input through the ref
+        setQty(Number(value))
+
+    }
 
     return (
         <div className="product-detail-container">
@@ -83,14 +111,15 @@ const ProductDetail = ({product, productSku}) => {
                 <div>
                     <small>In stock: {currentVariation.quantity}</small>
                     <br></br>
-                    <input type="number" min={1} max={currentVariation.quantity} defaultValue={1}/>
+                    <input type="number" min={1} max={currentVariation.quantity} defaultValue={1} ref={qtyRef} onChange={handleQuantity}/>
                 </div>
 
                 <div className="product-attributes">
                     {ListOfVariations ? getVariations() : <small>No variations</small>}
                 </div>
 
-                <button className="add-to-cart-button">Add to Cart</button>
+                <button className="add-to-cart-button" disabled={loading} onClick={() => addToCart(currentVariation.sku, qty)}>Add to
+                    Cart</button>
             </div>
             {/* Recommendations Section */}
 

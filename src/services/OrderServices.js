@@ -11,3 +11,8 @@ export const fetchCart= async ()=>{
         throw e
     }
 }
+
+export const PostAddToCart= async (product_sku, quantity)=>{
+    console.log(product_sku,quantity)
+    return await axios.post(API_URL+"v1/cart/",{product_sku:product_sku,quantity: quantity})
+}
