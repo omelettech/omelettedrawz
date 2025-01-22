@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export const API_URL = "http://127.0.0.1:8000/products/v1/"
 export const fetchProducts = async () => {
     try {
@@ -16,6 +17,16 @@ export const fetchFeaturedProducts = async () => {
         return response.data
     }
     catch (error) {
+        console.error(error)
         throw error
+    }
+}
+
+export const getProductVariations = async (id)=>{
+    try {
+        return await axios.get(API_URL + "product_skus/search_product/" + id)
+    }catch (e){
+        console.error(e)
+        throw e
     }
 }
