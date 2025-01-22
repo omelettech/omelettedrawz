@@ -1,9 +1,11 @@
 :root {
     --primary-color: #FFA45B;
     --secondary-color: #c2804c;
-    --accent-color: #236aef;
+    --accent-color: #237bef;
     --background-color: #FBF6F0;
     --text-color: #161618;
+
+    --shadow-buttons: rgba(168, 171, 250, 0.85);
 
     --button-background-color: #d21515;
     --button-text-color: #F6F1E9;
@@ -15,7 +17,7 @@
     --navbar-hover-color: #4F200D;
 
     --dropdown-bg: rgba(251, 246, 240, 0.5);
-    --dropdown-text-color: #333;
+        --dropdown-text-color: #333;
     --dropdown-hover-bg: #f0f0f0;
     --dropdown-hover-color: #FF8356;
 
@@ -39,6 +41,11 @@ body[data-theme='dark'] {
     --secondary-color: #ccc;
     --accent-color: #EEDF7A;
 
+    --shadow-buttons: rgba(253, 198, 82, 0.62);
+
+    --button-background-color: #fda35a;
+    --button-text-color: #F6F1E9;
+    --button-hover-background-color: #000;
 
     --card-background: #444;
     --card-shadow: rgba(0, 0, 0, 0.5);

@@ -170,3 +170,25 @@
     gap: 15px;
     width: 50%;
 }
+.cart-number-input[type=number]{
+    font-family:"Bangers",sans-serif ;
+    font-size: 1.5rem; /* Adjust the font size */
+    border: 2px solid var(--accent-color); /* Add a border with a light gray color */
+    border-radius: 5px; /* Add rounded corners */
+    outline: none; /* Remove the default outline on focus */
+    transition: border-color 0.3s ease; /* Add a smooth transition for border color */
+}
+
+.cart-number-input[type="number"]:focus {
+    box-shadow: 0 0 5px var(--shadow-buttons); /* Add a subtle shadow effect */
+    background-color: var(--shadow-buttons);
+
+
+}
+
+.cart-number-input[type="number"]:disabled {
+    background-color: var(--accent-color); /* Light gray background */
+    color: var(--accent-color); /* Gray text color */
+    border-color: #000000; /* Lighter border */
+    cursor: not-allowed; /* Show "not-allowed" cursor */
+}

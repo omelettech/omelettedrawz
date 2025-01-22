@@ -63,7 +63,7 @@ textarea {
     border: 2px solid var(--form-input-border);
     margin-top: 5px;
     background-color: var(--form-input-bg);
-    box-shadow: 2px 2px var(--text-color);
+    box-shadow: 2px 2px var(--shadow-buttons);
 }
 
 input[type="checkbox"],
