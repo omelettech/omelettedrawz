@@ -2,25 +2,30 @@ import React, {useEffect, useRef, useState} from "react";
 import "./ProductDetails.css"
 import axios from "axios";
 import {PostAddToCart} from "../../services/OrderServices";
+import {getProductVariations} from "../../services/ProductService";
 
 
-const ProductDetail = ({product, productSku}) => {
+const ProductDetail = ({product, productSku,onClose}) => {
     const [currentVariation, setCurrentVariation] = useState(productSku)
     const [ListOfVariations, setListOfVariations] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [qty, setQty] = useState(0)
+    const [qty, setQty] = useState(1)
     const qtyRef = useRef(null); // Ref for the input element
 
-    const fetchProductVariations = async (id) => {
-        try {
-            let response = await axios.get("http://127.0.0.1:8000/products/v1/product_skus/search_product/" + id)
-            setListOfVariations(response.data)
-            return response.data
-        } catch (error) {
-            console.error('Error fetching product variations ', error)
+    useEffect(()=>{
+        const fetchProductVariations = async () => {
+            try {
+                let response = await getProductVariations(product.id)
+                setListOfVariations(response.data)
+                return response.data
+            } catch (error) {
+                console.error('Error fetching product variations ', error)
+            }
         }
-    }
+
+        fetchProductVariations()
+    },[])
 
     const addToCart = async (product_sku, quantity) => {
         setLoading(true)
@@ -35,14 +40,10 @@ const ProductDetail = ({product, productSku}) => {
             console.error(e.message)
         } finally {
             setLoading(false)
+            onClose()
         }
     }
 
-    useEffect(() => {
-        return () => {
-            fetchProductVariations(product.id)
-        };
-    }, []);
 
 
     const getVariations = () => {
@@ -111,8 +112,8 @@ const ProductDetail = ({product, productSku}) => {
                 <div>
                     <small>In stock: {currentVariation.quantity}</small>
                     <br></br>
-                    <input type="number" min={1} max={currentVariation.quantity} defaultValue={1} ref={qtyRef}
-                           onChange={handleQuantity}/>
+                    <input className={"cart-number-input"} type="number" min={1} max={currentVariation.quantity} defaultValue={1} ref={qtyRef}
+                           onChange={handleQuantity} />
                 </div>
 
                 <div className="product-attributes">
@@ -120,8 +121,7 @@ const ProductDetail = ({product, productSku}) => {
                 </div>
 
                 <button className="add-to-cart-button" disabled={loading}
-                        onClick={() => addToCart(currentVariation.sku, qty)}>Add to
-                    Cart
+                        onClick={() => addToCart(currentVariation.sku, qty)}>Add to Cart
                 </button>
             </div>
             {/* Recommendations Section */}
