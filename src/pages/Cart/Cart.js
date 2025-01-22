@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import "./Cart.css"
 import {useNavigate} from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
@@ -12,7 +12,7 @@ const CartPage = () => {
     const [displayPopup, setDisplayPopup] = useState(false);
     const [selectedCartItemId, setSelectedCartItemId] = useState(null)
     const [Error, setError] = useState(null)
-    let updateTimer;
+    const updateTimer=useRef(null);
 
     const getCartData = async () => {
         try {
@@ -26,19 +26,28 @@ const CartPage = () => {
         }
     }
 
+    const updateQuantity=async (id,newQuantity)=>{
+        try {
+            const response = await PutCartItem(id,newQuantity)
+            console.log(response.data)
+        }catch (e){
+
+        }
+    }
     const handleQuantityChange = (id, newQuantity) => {
+        setSelectedCartItemId(id)
         setCartItems((prevItems) =>
             prevItems.map((item) =>
                 item.id === id ? {...item, quantity: newQuantity} : item
             )
         );
         // Clear the existing timer if it exists
-        if (updateTimer) {
-            clearTimeout(updateTimer);
+        if (updateTimer.current) {
+            clearTimeout(updateTimer.current);
         }
 
         // Start a new timer for 2 seconds
-        updateTimer = setTimeout(() => {
+        updateTimer.current = setTimeout(() => {
             // Call the backend API to update the quantity
             // updateQuantityOnBackend(id, newQuantity);
             console.log("Update qty request sent", newQuantity)
