@@ -131,7 +131,7 @@ const Shop = () => {
                     <div className="modal-container" onClick={(e) => e.stopPropagation()}>
                         <span className="modal-close" onClick={onClose}>&times;</span>
 
-                        <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku}/>
+                        <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku} onClose={onClose}/>
                     </div>
                 </div>
             }
