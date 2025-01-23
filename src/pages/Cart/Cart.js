@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import "./Cart.css"
 import {useNavigate} from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
-import {DeleteCartItem, fetchCart} from "../../services/OrderServices";
+import {DeleteCartItem, fetchCart, PutCartItem} from "../../services/OrderServices";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import {test_auth} from "../../services/apiClient";
 // Sample cart data
@@ -11,8 +11,11 @@ const CartPage = () => {
     const [cartItems, setCartItems] = useState(null);
     const [displayPopup, setDisplayPopup] = useState(false);
     const [selectedCartItemId, setSelectedCartItemId] = useState(null)
+    const [newQty, setNewQty] = useState(null)
+    const [updatingCart, setUpdatingCart] = useState(false)
     const [Error, setError] = useState(null)
-    const updateTimer=useRef(null);
+
+    const updateTimer = useRef(null);
 
     const getCartData = async () => {
         try {
@@ -26,15 +29,27 @@ const CartPage = () => {
         }
     }
 
-    const updateQuantity=async (id,newQuantity)=>{
+    const updateQuantity = async (id, newQuantity) => {
         try {
-            const response = await PutCartItem(id,newQuantity)
+            const response = await PutCartItem(id, newQuantity)
             console.log(response.data)
-        }catch (e){
+        } catch (e) {
 
         }
     }
+    const sendUpdateQuantityRequest = async (id, newQuantity) => {
+        setUpdatingCart(true)
+        try {
+            const response = await PutCartItem(id, newQuantity)
+            console.log("PUT request sent to backend", id, newQuantity)
+        } catch (e) {
+            console.error(e)
+        } finally {
+            setUpdatingCart(false)
+        }
+    };
     const handleQuantityChange = (id, newQuantity) => {
+        setUpdatingCart(true)
         setSelectedCartItemId(id)
         setCartItems((prevItems) =>
             prevItems.map((item) =>
@@ -51,7 +66,9 @@ const CartPage = () => {
             // Call the backend API to update the quantity
             // updateQuantityOnBackend(id, newQuantity);
             console.log("Update qty request sent", newQuantity)
-        }, 2000);
+            sendUpdateQuantityRequest(id, newQuantity)
+            // sendUpdateQuantityRequest()
+        }, 1500);
     };
 
     const handleRemoveItem = (id) => {
@@ -68,7 +85,7 @@ const CartPage = () => {
             console.log(response.data)
         } catch (e) {
             console.error(e)
-        }finally {
+        } finally {
             setDisplayPopup(false)
 
         }
@@ -76,7 +93,7 @@ const CartPage = () => {
 
     const getTotalPrice = () => {
         return cartItems.reduce(
-            (total, item) => total + (item.product_sku_price * item.quantity),
+            (total, item) => total + (item.product_sku.price * item.quantity),
             0,
         )
     };
@@ -85,18 +102,34 @@ const CartPage = () => {
         getCartData()
     }, [])
 
+    useEffect(() => {
+        console.log(selectedCartItemId)
+    }, [selectedCartItemId])
 
-
-    useEffect(()=>{
-        if(!displayPopup){
+    useEffect(() => {
+        if (!displayPopup) {
             setSelectedCartItemId(null)
-        }else if (!selectedCartItemId){
+        } else if (!selectedCartItemId) {
             //this means that it was deleted
             getCartData()
         }
-    },[displayPopup])
+    }, [displayPopup])
 
     const navigate = useNavigate()
+
+    function handleCheckout() {
+        sendUpdateQuantityRequest()
+        navigate()
+    }
+
+    const handleBlur = (id, newQuantity) => {
+        if (updateTimer.current) {
+            clearTimeout(updateTimer.current)
+        }
+
+        sendUpdateQuantityRequest(id, newQuantity)
+
+    };
     if (!Error) {
         return (
             <div className={"cart-container"}>
@@ -115,7 +148,8 @@ const CartPage = () => {
                                 <div key={item.id} className={'cart-item'}>
                                     {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
                                         <p>Are you sure</p>
-                                        <button className={"btn secondary"} onClick={() => RemoveItem(selectedCartItemId)}>
+                                        <button className={"btn secondary"}
+                                                onClick={() => RemoveItem(selectedCartItemId)}>
                                             Yes
                                         </button>
                                         <button className={"btn primary"} onClick={() => {
@@ -124,18 +158,31 @@ const CartPage = () => {
                                         </button>
 
                                     </Popup>}
-                                    <h2>{item.name}</h2>
-                                    <p>Price: ${item.product_sku_price}</p>
+                                    <div className={"cart-item-image"}>
+                                        <img src={"http://127.0.0.1:8000" + item.product_sku.associated_image?.image}
+                                             alt={item.product_sku.associated_image?.alt || "No image"}
+
+                                        />
+                                    </div>
+                                    <div style={{flexDirection: "column"}}>
+                                        <h3>{item.product_sku.product.name}</h3>
+                                        <p>Price: ${item.product_sku.price}</p>
+                                        <p>Total: ${(item.product_sku.price * item.quantity)}</p>
+                                    </div>
+
                                     <label>
                                         Qty:
                                         <input
+                                            className={"cart-number-input"}
                                             type="number"
                                             min="1"
+                                            max={item.product_sku.quantity}
                                             value={item.quantity}
+                                            onBlur={(e) => handleBlur(item.id, parseInt(e.target.value))}
                                             onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
+                                            onScroll={event => event.preventDefault()}
                                         />
                                     </label>
-                                    <p>Total: ${(item.product_sku_price * item.quantity)}</p>
                                     <button className="btn secondary" onClick={() => handleRemoveItem(item.id)}>
                                         Remove
                                     </button>
@@ -147,7 +194,8 @@ const CartPage = () => {
 
                         <div align={"right"}>
                             <h3 style={{fontFamily: "sans-serif"}}>Total Price: ${getTotalPrice()}</h3>
-                            <button className="btn primary" style={{padding: "10px 20px", marginTop: "20px"}}>
+                            <button className="btn primary" style={{padding: "10px 20px", marginTop: "20px"}}
+                                    onClick={handleCheckout} disabled={updatingCart}>
                                 Checkout
                             </button>
                         </div>
