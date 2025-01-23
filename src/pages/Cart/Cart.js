@@ -158,14 +158,15 @@ const CartPage = () => {
                                         </button>
 
                                     </Popup>}
-                                    <div className={"cart-item-image"}>
+                                    <div className={"cart-item-image-container"}>
                                         <img src={"http://127.0.0.1:8000" + item.product_sku.associated_image?.image}
                                              alt={item.product_sku.associated_image?.alt || "No image"}
+                                             className={"cart-item-image"}
 
                                         />
                                     </div>
                                     <div style={{flexDirection: "column"}}>
-                                        <h3>{item.product_sku.product.name}</h3>
+                                        <h2>{item.product_sku.product.name}</h2>
                                         <p>Price: ${item.product_sku.price}</p>
                                         <p>Total: ${(item.product_sku.price * item.quantity)}</p>
                                     </div>
