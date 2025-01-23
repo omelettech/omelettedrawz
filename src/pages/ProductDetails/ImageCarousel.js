@@ -5,10 +5,10 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import {BASE_URL} from "../../services/apiClient";
 
 const ImageCarousel = ({ images }) => {
     console.count('counter')
-    let MEDIA_URL = "http://127.0.0.1:8000"
 
     const scrollBackToFirst=()=>{
         const swiper = document.querySelector('.swiper').swiper;
@@ -34,7 +34,7 @@ const ImageCarousel = ({ images }) => {
             >
                 {images.map((image, index) => (
                     <SwiperSlide key={index}>
-                        <img src={MEDIA_URL+image.image} alt={`Product ${index + 1}`}
+                        <img src={BASE_URL+image.image} alt={`Product ${index + 1}`}
                              className="product-carousel-image"
 
                         />
