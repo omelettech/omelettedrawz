@@ -149,21 +149,3 @@
     gap: 10px;
 }
 
-/*CAROUSEL STYLES*/
-
-.image-carousel-container {
-    width: 100%;
-    max-width: 500px; /* Adjust as needed */
-    margin: auto;
-}
-
-.product-carousel-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-.swiper-button-next,
-.swiper-button-prev {
-    color: #333; /* Customize arrow colors */
-}

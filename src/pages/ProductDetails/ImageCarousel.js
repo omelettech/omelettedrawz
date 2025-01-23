@@ -21,6 +21,7 @@ const ImageCarousel = ({ images }) => {
     return (
         <div className="image-carousel-container">
             <Swiper
+                style={{maxHeight:"650px"}}
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={50}
                 slidesPerView={1}
@@ -29,10 +30,14 @@ const ImageCarousel = ({ images }) => {
                 scrollbar={{ draggable: true }}
                 onSwiper={(swiper) => console.log(swiper)}
                 onSlideChange={() => scrollBackToFirst()}
+                centeredSlides={true}
             >
                 {images.map((image, index) => (
                     <SwiperSlide key={index}>
-                        <img src={MEDIA_URL+image.image} alt={`Product ${index + 1}`} className="product-carousel-image" />
+                        <img src={MEDIA_URL+image.image} alt={`Product ${index + 1}`}
+                             className="product-carousel-image"
+
+                        />
                     </SwiperSlide>
                 ))}
             </Swiper>

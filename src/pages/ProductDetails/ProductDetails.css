@@ -153,12 +153,6 @@
 
 }
 
-.product-detail-image-container img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
 .product-detail-container small {
     color: var(--secondary-color);
 
@@ -191,4 +185,26 @@
     color: var(--accent-color); /* Gray text color */
     border-color: #000000; /* Lighter border */
     cursor: not-allowed; /* Show "not-allowed" cursor */
+}
+
+/*CAROUSEL STYLES*/
+
+.image-carousel-container {
+    width: 100%;
+    max-width: 40vw; /* Adjust as needed */
+    margin: auto;
+
+}
+
+.product-carousel-image {
+    width: 100%;
+    height: auto;
+    max-height: 650px;
+    object-fit: cover;
+
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #333; /* Customize arrow colors */
 }
