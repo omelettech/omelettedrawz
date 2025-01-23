@@ -3,17 +3,19 @@ import "./ProductDetails.css"
 import axios from "axios";
 import {PostAddToCart} from "../../services/OrderServices";
 import {getProductVariations} from "../../services/ProductService";
+import ImageCarousel from "./ImageCarousel";
 
 
-const ProductDetail = ({product, productSku,onClose}) => {
+const ProductDetail = ({product, productSku, onClose}) => {
     const [currentVariation, setCurrentVariation] = useState(productSku)
     const [ListOfVariations, setListOfVariations] = useState(null)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
     const [qty, setQty] = useState(1)
     const qtyRef = useRef(null); // Ref for the input element
+    const [carouselKey, setCarouselKey] = useState(0);
 
-    useEffect(()=>{
+    useEffect(() => {
         const fetchProductVariations = async () => {
             try {
                 let response = await getProductVariations(product.id)
@@ -25,7 +27,14 @@ const ProductDetail = ({product, productSku,onClose}) => {
         }
 
         fetchProductVariations()
-    },[])
+    }, [])
+
+    useEffect(() => {
+        const reRenderCarousel = () => {
+            setCarouselKey((prevKey) => prevKey + 1); // Increment the key to re-render
+        };
+        reRenderCarousel()
+    }, [currentVariation]);
 
     const addToCart = async (product_sku, quantity) => {
         setLoading(true)
@@ -43,7 +52,6 @@ const ProductDetail = ({product, productSku,onClose}) => {
             onClose()
         }
     }
-
 
 
     const getVariations = () => {
@@ -73,12 +81,22 @@ const ProductDetail = ({product, productSku,onClose}) => {
 
     }
 
+    const getImages = () => {
+        if (currentVariation.picture_attribute) {
+            console.log([currentVariation.associated_image, ...product.images])
+            return [currentVariation.associated_image, ...product.images]
+        } else {
+            return product.images
+        }
+    };
     return (
         <div className="product-detail-container">
             <div className={"product-detail-image-container"}>
-                {/*<img src={product.image} alt={product.name} className="product-detail-image"/>*/}
-                <img src={"http://127.0.0.1:8000/media/images/8357566.jpg"} alt={product.name}
-                     className="product-detail-image"/>
+                <ImageCarousel key={carouselKey} images={getImages()}/>
+
+                {/*/!*<img src={product.image} alt={product.name} className="product-detail-image"/>*!/*/}
+                {/*<img src={"http://127.0.0.1:8000/media/images/8357566.jpg"} alt={product.name}*/}
+                {/*     className="product-detail-image"/>*/}
             </div>
             <div className="product-detail-info">
                 <h2 className="product-title">{product.name}</h2>
@@ -112,8 +130,9 @@ const ProductDetail = ({product, productSku,onClose}) => {
                 <div>
                     <small>In stock: {currentVariation.quantity}</small>
                     <br></br>
-                    <input className={"cart-number-input"} type="number" min={1} max={currentVariation.quantity} defaultValue={1} ref={qtyRef}
-                           onChange={handleQuantity} />
+                    <input className={"cart-number-input"} type="number" min={1} max={currentVariation.quantity}
+                           defaultValue={1} ref={qtyRef}
+                           onChange={handleQuantity}/>
                 </div>
 
                 <div className="product-attributes">
