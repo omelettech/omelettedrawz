@@ -24,5 +24,5 @@ export const DeleteCartItem = async (id)=>{
 
 export const PutCartItem = async (id,newQuantity)=>{
     console.log("Putting Cart item",id,newQuantity)
-    return await axios.put(API_URL+"")
+    return await axios.put(API_URL+`v1/cart/${id}`,{quantity:newQuantity})
 }
