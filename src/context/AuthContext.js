@@ -96,6 +96,19 @@ export const AuthProvider = ({children}) => {
 
     }
 
+    const register=async (username,email,password1,password2)=>{
+        setAuthLoading(true)
+        removeTokens()
+        try{
+            const resp = await axios.post(BASE_URL+"users/v1/dj-rest-auth/registration",{username,email,password1,password2})
+            console.log(resp.data)
+        }catch (e){
+            console.error(e)
+        }finally {
+            setAuthLoading(false)
+        }
+    }
+
     useEffect(() => {
         if (token) {
             updateToken(token)
@@ -106,7 +119,7 @@ export const AuthProvider = ({children}) => {
     }, [token])
 
     return (
-        <AuthContext.Provider value={{token, currentUser, login, logout, authLoading}}>
+        <AuthContext.Provider value={{token, currentUser, login, logout,register, authLoading}}>
             {children}
         </AuthContext.Provider>
     );
