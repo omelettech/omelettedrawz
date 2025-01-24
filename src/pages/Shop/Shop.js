@@ -151,10 +151,13 @@ const Shop = () => {
 
             <div>
                 <SectionHeading text={"All products"} align={"center"}></SectionHeading>
+                <br/>
+                <hr/>
+                <br/>
                 <div className="shop-container">
-                    <div className={"shop-sidebar"}>
-                        {getSideBarContent()}
-                    </div>
+                    {/*<div className={"shop-sidebar"}>*/}
+                    {/*    {getSideBarContent()}*/}
+                    {/*</div>*/}
                     {
                         (!loading && getPageContent())
                         ||

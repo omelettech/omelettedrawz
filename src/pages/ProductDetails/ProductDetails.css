@@ -164,8 +164,9 @@
     gap: 15px;
     width: 50%;
 }
-.cart-number-input[type=number]{
-    font-family:"Bangers",sans-serif ;
+
+.cart-number-input[type=number] {
+    font-family: "Bangers", sans-serif;
     font-size: 1.5rem; /* Adjust the font size */
     border: 2px solid var(--accent-color); /* Add a border with a light gray color */
     border-radius: 5px; /* Add rounded corners */
@@ -207,4 +208,65 @@
 .swiper-button-next,
 .swiper-button-prev {
     color: #333; /* Customize arrow colors */
+}
+
+.swiper-slide.swiper-slide-active{
+    align-self: center;
+}
+
+
+@media screen and (max-width: 600px) {
+
+    .modal-container{
+        display: flex;
+        justify-content: center;
+        max-width: unset;
+    }
+
+    .product-detail-info{
+        width: 100%;
+    }
+
+    .product-detail-container {
+        padding: 10px;
+        margin:0;
+        min-width: unset;
+        width: 100%;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        overflow: hidden;
+        flex-direction: column;
+        overflow-y: scroll;
+        scrollbar-width: thin;
+        scrollbar-color: var(--secondary-color) var(--background-color);
+
+
+    }
+
+    .product-detail-image-container {
+        min-width: unset;
+        width: 100%; /* Adjust as needed */
+
+    }
+
+    .image-carousel-container {
+        width: 100%;
+        max-width: 100%; /* Adjust as needed */
+        margin: auto;
+        height: 20vh;
+
+
+    }
+
+    .product-carousel-image {
+        max-width: unset;
+        width: 100%;
+        height: 20vh;
+        max-height: 650px;
+        object-fit: contain;
+
+
+    }
+
+
 }

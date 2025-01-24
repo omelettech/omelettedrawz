@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./SidebarShop.css";
 
 const SidebarShop = ({categories, filters, onFilterChange}) => {
-    const [isCollapsed, setIsCollapsed] = useState(false);
+    const [isCollapsed, setIsCollapsed] = useState(true);
 
 
     const handleCollapse = () => {
@@ -19,8 +19,9 @@ const SidebarShop = ({categories, filters, onFilterChange}) => {
             </div>
 
             <div className="sidebar-content">
+                <h4>Type</h4>
+
                 <div className="filter-group">
-                    <h4>Type</h4>
 
                         {categories.map((category, index) => (
                             <div key={index}>
@@ -45,17 +46,17 @@ const SidebarShop = ({categories, filters, onFilterChange}) => {
 
 
                                {filter.options.map((option, idx) => (
-                                   <label key={idx}>
+                                   <a key={idx}>
 
-                                       <input
-                                           type={filter.type}
-                                           value={option}
-                                           onChange={(e) => onFilterChange(e.target.value)}
-                                       />
+                                       {/*<input*/}
+                                       {/*    type={filter.type}*/}
+                                       {/*    value={option}*/}
+                                       {/*    onChange={(e) => onFilterChange(e.target.value)}*/}
+                                       {/*/>*/}
 
                                        {option}
 
-                                   </label>
+                                   </a>
 
                                ))}
 

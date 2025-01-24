@@ -121,11 +121,7 @@ const ProductDetail = ({product, productSku, onClose}) => {
 
                 </div>
 
-                <div>
-                    <small>Price:</small>
-                    <h3 className="product-price" style={{marginTop: 0}}>${currentVariation.price}</h3>
 
-                </div>
 
                 <div>
                     <small>In stock: {currentVariation.quantity}</small>
@@ -139,6 +135,10 @@ const ProductDetail = ({product, productSku, onClose}) => {
                     {ListOfVariations ? getVariations() : <small>No variations</small>}
                 </div>
 
+                <div>
+                    <small>Price:</small>
+                    <h3 className="product-price" style={{marginTop: 0}}>${currentVariation.price}</h3>
+                </div>
                 <button className="add-to-cart-button" disabled={loading}
                         onClick={() => addToCart(currentVariation.sku, qty)}>Add to Cart
                 </button>
