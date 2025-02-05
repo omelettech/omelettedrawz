@@ -97,13 +97,15 @@ export const AuthProvider = ({children}) => {
     }
 
     const register=async (username,email,password1,password2)=>{
+        // password1 and 2 is not too short, at least 8 characters and not too common.
+
         setAuthLoading(true)
         removeTokens()
         try{
-            const resp = await axios.post(BASE_URL+"users/v1/dj-rest-auth/registration",{username,email,password1,password2})
+            const resp = await axios.post(BASE_URL+"users/v1/dj-rest-auth/registration/",{username,email,password1,password2})
             console.log(resp.data)
         }catch (e){
-            console.error(e)
+            console.error(e.message || e.detail)
         }finally {
             setAuthLoading(false)
         }

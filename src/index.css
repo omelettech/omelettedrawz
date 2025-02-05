@@ -97,7 +97,17 @@ html,body,#root{
     margin: 0;
     bottom: 0;
 }
+a:link{
+    text-decoration: none;
+    color: var(--navbar-link-color);
+}
+a:visited{
+    color: var(--navbar-link-color);
 
+}
+a:hover{
+    text-decoration: underline;
+}
 /* Typography hierarchy */
 h1 {
     font-family: var(--font-h1);

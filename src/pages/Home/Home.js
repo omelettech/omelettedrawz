@@ -16,7 +16,6 @@ const Home = () => {
     return (
         <>
 
-            {!currentUser &&
                 <div className="hero-section">
                     <div className="hero-content">
                         <h1>GIVE YOUR PERSONAL SPACE LIFE</h1>
@@ -27,7 +26,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-            }
+
             <SectionHeading text={"Featured"} align={"center"}/>
             <BodyCard img={red_guy} title={"Disassociate"} buttonText={"Check out more"} description={
                 "I often find myself lost in the absurdness of reality, With the color scheme of Green and red" +

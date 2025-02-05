@@ -37,7 +37,7 @@ function App() {
 
                 </Routes>
                 <div className={"cart-btn"}>
-                    <Link to={"/cart"} style={{width:"100%",height:"100%"}}>
+                    <Link to={"/cart"} style={{width: "100%", height: "100%"}}>
                         <svg xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 576 512">
                             <path
@@ -47,7 +47,11 @@ function App() {
                 </div>
 
                 <footer>
-                    <small style={{paddingRight:"10px",marginRight:"auto",marginLeft:"auto"}}>&copy; Awsaf Fida Mahmud 2024</small>
+                    <small style={{paddingRight: "10px", marginRight: "auto", marginLeft: "auto"}}>
+                        &copy;
+                        <Link to={"https://afmahmud.dev"} target={"_blank"}> Awsaf Fida Mahmud </Link>
+                        2024. All rights reserved.
+                    </small>
                 </footer>
             </Router>
 
