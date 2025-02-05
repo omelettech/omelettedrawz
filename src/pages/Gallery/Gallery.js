@@ -15,20 +15,8 @@ import image10 from "../../assets/images/red guy2.png";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import "yet-another-react-lightbox/styles.css";
 import Lightbox from "yet-another-react-lightbox";
+import {fetchGalleryItems} from "../../services/GalleryService";
 
-
-const images = [
-    {src: image1, width: 4000, height: 4000, alt: "alt"},
-    {src: image2, width: 2362, height: 3496, alt: "alt"},
-    {src: image3, width: 4000, height: 4000, alt: "alt"},
-    {src: image4, width: 3600, height: 4800, alt: "alt"},
-    {src: image5, width: 3000, height: 3750, alt: "alt"},
-    {src: image7, width: 4000, height: 4000, alt: "alt"},
-    {src: image8, width: 3000, height: 3750, alt: "alt"},
-    {src: image9, width: 2406, height: 3006, alt: "alt"},
-    {src: image10, width: 3000, height: 3750, alt: "alt"},
-
-]
 
 const minImgWidth = 500
 const calculateHeight = (w, h) => {
@@ -42,19 +30,17 @@ const Gallery = () => {
     const [photoIndex, setPhotoIndex] = useState(0);
 
 
+    const getGalleryItems=async ()=>{
+        try {
+            const response = await fetchGalleryItems()
+            setLayout(response)
+        }catch (e){
+            console.error(e)
+        }
+    }
+
     useEffect(() => {
-        const layoutData = images.map((img) => {
-
-
-            return {
-                id:img.src,
-                ...img,
-                width: img.width < minImgWidth ? img.width : minImgWidth,
-                height: calculateHeight(img.width, img.height)
-            };
-        });
-
-        setLayout(layoutData);
+        getGalleryItems()
     }, []);
     const openModal = (index) => {
         setPhotoIndex(index);
@@ -94,7 +80,8 @@ const Gallery = () => {
                 close={() => setIsOpen(false)}
 
                 on={{view: ({index: currentIndex}) => setPhotoIndex(currentIndex)}}
-                slides={images}
+                slides={layout}
+
                 styles={{
                     container: {
                         backgroundColor: "rgba(0,0,0,0.7)",
