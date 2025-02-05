@@ -166,7 +166,7 @@
     }
 
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 700px) {
     .products-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(100px, 1fr));

@@ -49,7 +49,7 @@ const Shop = () => {
         })
 
         fetchFeaturedProducts().then((data) => {
-            setFeaturedProducts(data)
+            setFeaturedProducts(data.slice(0,window.innerWidth>1200 || window.innerWidth<=700?4:3))
         }).catch((err) => {
             console.error('Error fetching featured products:', err);
         }).finally(() => setLoading(false))
