@@ -32,3 +32,9 @@
 
 .form-container a:visited{
 text-decoration: none}
+
+.register-error {
+
+    color: #ff492b;
+    text-align: center;
+}
