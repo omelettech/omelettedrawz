@@ -38,10 +38,14 @@ const Shop = () => {
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [featuredProducts, setFeaturedProducts] = useState([])
 
+    let filteredProducts=[]
+
     useEffect(() => {
 
         fetchProducts().then((data) => {
-            setProducts(data)
+            if (data) {
+                setProducts(data)
+            }
         }).catch((error) => {
             console.error('Error fetching products:', error);
         }).finally(() => {
@@ -94,10 +98,14 @@ const Shop = () => {
 
     }
 
-    const filteredProducts = products.filter((product) =>
-        product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        (selectedCategory === 'All' || product.category === selectedCategory)
-    );
+    if (products && products.count>0) {
+        filteredProducts = products.filter((product) =>
+            product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (selectedCategory === 'All' || product.category === selectedCategory)
+        );
+    } else {
+        filteredProducts = []
+    }
 
     function getSideBarContent() {
         return (
