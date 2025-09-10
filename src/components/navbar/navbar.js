@@ -18,11 +18,6 @@ const Navbar = () => {
             setIsOpen(!isOpen);
         };
 
-        //TODO: Temporary
-        const displayUserProperties=()=>{
-            console.log(
-                `User profile: ${currentUser}\n Token: ${token}`)
-        }
 
         const handleLogout = async () => {
             try {
@@ -60,7 +55,6 @@ const Navbar = () => {
 
     return (
             <div className={`navbar dark`}>
-                {currentUser && <div>{currentUser.username}</div>}
                 <div className="navbar-start" onClick={()=>navigate("/")}>
                     <div className="logo-container">
                         <img src={logo} alt="Logo" className="logo"/>
@@ -128,9 +122,6 @@ const Navbar = () => {
                                 {currentUser && <li><Link to="/contact">Profile</Link></li>}
                                 <li><Link to="/contact">Contact</Link></li>
 
-                                <li>
-                                    <button onClick={displayUserProperties}></button>
-                                </li>
 
                                 {currentUser ?
                                     <li onClick={handleLogout}><Link to={"/"}>Logout</Link></li>

@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import './Shop.css';
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
-import ProductDetails from "../ProductDetails/ProductDetails";
 import ProductDetail from "../ProductDetails/ProductDetails";
 import ProductCard from "./ProductCard";
 import {fetchFeaturedProducts, fetchProducts} from "../../services/ProductService";
+import ActivityWheel from "../../components/ActivityWheel";
 
 
 const filters = [
@@ -38,10 +37,11 @@ const Shop = () => {
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [featuredProducts, setFeaturedProducts] = useState([])
 
-    let filteredProducts=[]
+    let filteredProducts = []
 
     useEffect(() => {
 
+        setLoading(true)
         fetchProducts().then((data) => {
             if (data) {
                 setProducts(data)
@@ -53,7 +53,7 @@ const Shop = () => {
         })
 
         fetchFeaturedProducts().then((data) => {
-            setFeaturedProducts(data.slice(0,window.innerWidth>1200 || window.innerWidth<=700?4:3))
+            setFeaturedProducts(data.slice(0, window.innerWidth > 1200 || window.innerWidth <= 700 ? 4 : 3))
         }).catch((err) => {
             console.error('Error fetching featured products:', err);
         }).finally(() => setLoading(false))
@@ -98,7 +98,7 @@ const Shop = () => {
 
     }
 
-    if (products && products.count>0) {
+    if (products && products.count > 0) {
         filteredProducts = products.filter((product) =>
             product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
             (selectedCategory === 'All' || product.category === selectedCategory)
@@ -132,49 +132,62 @@ const Shop = () => {
             </div>
         )
     };
-    return (
-        <>
-            {selectedProduct &&
-                <div className="modal-overlay" onClick={onClose}>
-                    <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-                        <span className="modal-close" onClick={onClose}>&times;</span>
+    if (!loading) {
+        return (
+            <>
+                {selectedProduct &&
+                    <div className="modal-overlay" onClick={onClose}>
+                        <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+                            <span className="modal-close" onClick={onClose}>&times;</span>
 
-                        <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku} onClose={onClose}/>
+                            <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku}
+                                           onClose={onClose}/>
+                        </div>
+                    </div>
+                }
+
+                <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>
+
+                <div>
+                    <SectionHeading text={"Artist picks"} align={"center"}></SectionHeading>
+
+                    <div className="shop-container">
+                        {/*<div className={"shop-sidebar"}>*/}
+                        {/*    {getSideBarContent()}*/}
+                        {/*</div>*/}
+                        {!loading && getFeaturedContent()}
                     </div>
                 </div>
-            }
 
+                <div>
+                    <SectionHeading text={"All products"} align={"center"}></SectionHeading>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <div className="shop-container">
+                        {/*<div className={"shop-sidebar"}>*/}
+                        {/*    {getSideBarContent()}*/}
+                        {/*</div>*/}
+                        {
+                            (!loading && getPageContent())
+                            ||
+                            <div>Loading</div>
+                        }
+                    </div>
+                </div>
+            </>
+        );
+    } else {
+
+        return <>
             <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>
 
-            <div>
-                <SectionHeading text={"Artist picks"} align={"center"}></SectionHeading>
+            <div className={"loader-container"}>
 
-                <div className="shop-container">
-                    {/*<div className={"shop-sidebar"}>*/}
-                    {/*    {getSideBarContent()}*/}
-                    {/*</div>*/}
-                    {!loading && getFeaturedContent()}
-                </div>
-            </div>
-
-            <div>
-                <SectionHeading text={"All products"} align={"center"}></SectionHeading>
-                <br/>
-                <hr/>
-                <br/>
-                <div className="shop-container">
-                    {/*<div className={"shop-sidebar"}>*/}
-                    {/*    {getSideBarContent()}*/}
-                    {/*</div>*/}
-                    {
-                        (!loading && getPageContent())
-                        ||
-                        <div>Loading</div>
-                    }
-                </div>
+                <ActivityWheel></ActivityWheel>
             </div>
         </>
-    );
+    }
 
 
 };

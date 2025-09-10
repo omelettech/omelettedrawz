@@ -4,11 +4,11 @@ import {useNavigate} from "react-router-dom";
 import Popup from "../../components/Popup/Popup";
 import {DeleteCartItem, fetchCart, PutCartItem} from "../../services/OrderServices";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
-import {test_auth} from "../../services/apiClient";
+
 // Sample cart data
 
 const CartPage = () => {
-    const [cartItems, setCartItems] = useState(null);
+    const [cartItems, setCartItems] = useState([]);
     const [displayPopup, setDisplayPopup] = useState(false);
     const [selectedCartItemId, setSelectedCartItemId] = useState(null)
     const [newQty, setNewQty] = useState(null)
@@ -20,12 +20,16 @@ const CartPage = () => {
     const getCartData = async () => {
         try {
             const cart_data = await fetchCart()
-            const [{cartitem_set}] = cart_data
-            console.log(cartitem_set)
-            setCartItems(cartitem_set)
+            console.log(cart_data.status)
+           if(cart_data.status===200){
+               const [{cartitem_set}] = cart_data.data
+               console.log(cartitem_set)
+               setCartItems(cartitem_set)
+           }
         } catch (e) {
-            console.error(e)
-            setError("ASDKHASD")
+            if (e.status ===401){
+                setError("You are not logged in")
+            }
         }
     }
 
@@ -139,7 +143,7 @@ const CartPage = () => {
                 <br/>
 
                 {!cartItems || cartItems.length === 0 ? (
-                    <p>Your cart is empty.</p>
+                    <p>"Your cart is empty"</p>
                 ) : (
                     <div>
 
@@ -209,8 +213,7 @@ const CartPage = () => {
         );
     } else {
         return <div>
-            <SectionHeading text={"Error"} align={"center"}/>
-            <button onClick={test_auth}>TEST</button>
+            <SectionHeading text={Error || "Error"} align={"center"}/>
 
         </div>
     }
