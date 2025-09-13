@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import './Shop.css';
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
-import ProductDetails from "../ProductDetails/ProductDetails";
-import ProductDetail from "../ProductDetails/ProductDetails";
 import ProductCard from "./ProductCard";
-import {fetchFeaturedProducts, fetchProducts} from "../../services/ProductService";
-
+import {fetchProducts} from "../../services/ProductService";
 
 const filters = [
     {
@@ -38,7 +34,7 @@ const Shop = () => {
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [featuredProducts, setFeaturedProducts] = useState([])
 
-    let filteredProducts=[]
+    let filteredProducts = []
 
     useEffect(() => {
 
@@ -52,16 +48,15 @@ const Shop = () => {
             setLoading(false)
         })
 
-        fetchFeaturedProducts().then((data) => {
-            setFeaturedProducts(data.slice(0,window.innerWidth>1200 || window.innerWidth<=700?4:3))
-        }).catch((err) => {
-            console.error('Error fetching featured products:', err);
-        }).finally(() => setLoading(false))
+        // fetchFeaturedProducts().then((data) => {
+        //     setFeaturedProducts(data.slice(0,window.innerWidth>1200 || window.innerWidth<=700?4:3))
+        // }).catch((err) => {
+        //     console.error('Error fetching featured products:', err);
+        // }).finally(() => setLoading(false))
     }, []);
 
 
     const handleFilterChange = (filter) => {
-
         console.log(filter);
     };
     const handleProductClick = (product) => {
@@ -70,23 +65,19 @@ const Shop = () => {
     const onClose = () => {
         setSelectedProduct(null)
     }
-    const getProductImage = (id) => {
-        return "http://127.0.0.1:8000/media/images/8357566.jpg"
 
-    }
     const getPageContent = () => {
         if (!loading) {
             return (
                 <div>
                     <div className="products-grid">
                         {filteredProducts.map((product) => {
-                                if (product.default_sku && !product.deleted_at) {
-                                    return (
+                                return (
 
-                                        <ProductCard product={product} onClick={() => handleProductClick(product)}
-                                                     getImageSourceCallback={getProductImage(1)}></ProductCard>
-                                    )
-                                }
+                                    <ProductCard product={product} onClick={() => handleProductClick(product)}
+                                                 getImageSourceCallback={product.src}></ProductCard>
+                                )
+
                             }
                         )}
                     </div>
@@ -98,12 +89,14 @@ const Shop = () => {
 
     }
 
-    if (products && products.count>0) {
+    if (products) {
         filteredProducts = products.filter((product) =>
             product.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (selectedCategory === 'All' || product.category === selectedCategory)
+            (selectedCategory === 'All' || product.name)
         );
     } else {
+        console.log(products)
+
         filteredProducts = []
     }
 
@@ -121,12 +114,11 @@ const Shop = () => {
         return (
             <div className="products-grid">
                 {featuredProducts.map((product) => {
-                        if (product.default_sku && !product.deleted_at) {
-                            return (
-                                <ProductCard key={product.id} product={product} onClick={() => handleProductClick(product)}
-                                             getImageSourceCallback={getProductImage(1)}></ProductCard>
-                            )
-                        }
+                        return (
+                            <ProductCard key={product.id} product={product} onClick={() => handleProductClick(product)
+                            }></ProductCard>
+                        )
+
                     }
                 )}
             </div>
