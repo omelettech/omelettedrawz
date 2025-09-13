@@ -19,14 +19,17 @@ export const fetchProducts = async () => {
                 id: documentId,
                 name: documentData.name,
                 price: documentData.price,
-                imageUrl: documentData.imageUrl
+                src: documentData.src
             })
             // Build a new object that combines ID + fields
             return {
                 id: documentId,
                 name: documentData.name,
+                description:documentData.description,
+                summary:documentData.summary,
                 price: documentData.price,
-                imageUrl: documentData.imageUrl
+                src:documentData.src,
+                alt:documentData.alt
             };
         });
     } catch (error) {
