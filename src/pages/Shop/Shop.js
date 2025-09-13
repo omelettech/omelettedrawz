@@ -134,15 +134,16 @@ const Shop = () => {
     };
     return (
         <>
-            {selectedProduct &&
-                <div className="modal-overlay" onClick={onClose}>
-                    <div className="modal-container" onClick={(e) => e.stopPropagation()}>
-                        <span className="modal-close" onClick={onClose}>&times;</span>
+            {/*{selectedProduct &&*/}
+            {/*    <div className="modal-overlay" onClick={onClose}>*/}
+            {/*        <div className="modal-container" onClick={(e) => e.stopPropagation()}>*/}
+            {/*            <span className="modal-close" onClick={onClose}>&times;</span>*/}
 
-                        <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku} onClose={onClose}/>
-                    </div>
-                </div>
-            }
+            {/*            <ProductDetail product={selectedProduct} productSku={selectedProduct.default_sku}*/}
+            {/*                           onClose={onClose}/>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*}*/}
 
             <PageHeading url={"/static/media/image2.2afdf2e7a647b3e0e510.png"} text={"Store"}></PageHeading>
 
