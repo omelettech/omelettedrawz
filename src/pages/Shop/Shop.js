@@ -5,6 +5,7 @@ import PageHeading from "../../components/PageHeading/PageHeading.tsx";
 import SidebarShop from "../../components/SidebarShop/SidebarShop";
 import ProductCard from "./ProductCard";
 import {fetchProducts} from "../../services/ProductService";
+import {useCart} from "../../context/CartContext";
 
 const filters = [
     {
@@ -33,6 +34,8 @@ const Shop = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [selectedProduct, setSelectedProduct] = useState(null)
     const [featuredProducts, setFeaturedProducts] = useState([])
+
+    const {addToCart} = useCart()
 
     let filteredProducts = []
 
@@ -74,8 +77,11 @@ const Shop = () => {
                         {filteredProducts.map((product) => {
                                 return (
 
-                                    <ProductCard product={product} onClick={() => handleProductClick(product)}
-                                                 getImageSourceCallback={product.src}></ProductCard>
+                                    <ProductCard product={product} handleAddToCart={addToCart}>
+
+
+                                    </ProductCard>
+                                    // getImageSourceCallback is unused
                                 )
 
                             }
