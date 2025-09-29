@@ -10,7 +10,10 @@ export const CartProvider = ({children}) => {
         setCartContents((prevCart) => {
             // if there is an existing product with the same id, increase its quantity
             const existing = prevCart.find((i) => i.id === item.id);
+
+
             if (existing) {
+
                 return prevCart.map((i) =>
                     i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
                 );
@@ -23,7 +26,7 @@ export const CartProvider = ({children}) => {
         setCartContents((prevCart) => prevCart.filter((i) => i.id !== id));
     };
     const clearCart = () => {
-        setCart([]);
+        setCartContents([]);
     };
     return (
         <CartContext.Provider value={{ cartContents, addToCart, removeFromCart, clearCart }}>
