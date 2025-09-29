@@ -15,12 +15,7 @@ export const fetchProducts = async () => {
 
             // Get the data fields (the actual product info you stored in Firestore)
             const documentData = doc.data();
-            console.log({
-                id: documentId,
-                name: documentData.name,
-                price: documentData.price,
-                src: documentData.src
-            })
+
             // Build a new object that combines ID + fields
             return {
                 id: documentId,
@@ -28,6 +23,7 @@ export const fetchProducts = async () => {
                 description:documentData.description,
                 summary:documentData.summary,
                 price: documentData.price,
+                inventory:documentData.inventory,
                 src:documentData.src,
                 alt:documentData.alt
             };
