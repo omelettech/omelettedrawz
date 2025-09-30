@@ -5,84 +5,39 @@ import Popup from "../../components/Popup/Popup";
 import {DeleteCartItem, fetchCart, PutCartItem} from "../../services/OrderServices";
 import SectionHeading from "../../components/SectionHeading/SectionHeading.tsx";
 import {test_auth} from "../../services/apiClient";
+import {useCart} from "../../context/CartContext";
 // Sample cart data
 
 const CartPage = () => {
-    const [cartItems, setCartItems] = useState(null);
+
+    const {cartContents,removeFromCart,addToCart, updateCartQuantity} = useCart()
+
     const [displayPopup, setDisplayPopup] = useState(false);
     const [selectedCartItemId, setSelectedCartItemId] = useState(null)
-    const [newQty, setNewQty] = useState(null)
     const [updatingCart, setUpdatingCart] = useState(false)
     const [Error, setError] = useState(null)
 
-    const updateTimer = useRef(null);
 
-    const getCartData = async () => {
-        try {
-            const cart_data = await fetchCart()
-            const [{cartitem_set}] = cart_data
-            console.log(cartitem_set)
-            setCartItems(cartitem_set)
-        } catch (e) {
-            console.error(e)
-            setError("ASDKHASD")
-        }
-    }
-
-    const updateQuantity = async (id, newQuantity) => {
-        try {
-            const response = await PutCartItem(id, newQuantity)
-            console.log(response.data)
-        } catch (e) {
-
-        }
-    }
-    const sendUpdateQuantityRequest = async (id, newQuantity) => {
-        setUpdatingCart(true)
-        try {
-            const response = await PutCartItem(id, newQuantity)
-            console.log("PUT request sent to backend", id, newQuantity)
-        } catch (e) {
-            console.error(e)
-        } finally {
-            setUpdatingCart(false)
-        }
-    };
-    const handleQuantityChange = (id, newQuantity) => {
+    const handleQuantityChange = (id,newQuantity) =>{
         setUpdatingCart(true)
         setSelectedCartItemId(id)
-        setCartItems((prevItems) =>
-            prevItems.map((item) =>
-                item.id === id ? {...item, quantity: newQuantity} : item
-            )
-        );
-        // Clear the existing timer if it exists
-        if (updateTimer.current) {
-            clearTimeout(updateTimer.current);
-        }
-
-        // Start a new timer for 2 seconds
-        updateTimer.current = setTimeout(() => {
-            // Call the backend API to update the quantity
-            // updateQuantityOnBackend(id, newQuantity);
-            console.log("Update qty request sent", newQuantity)
-            sendUpdateQuantityRequest(id, newQuantity)
-            // sendUpdateQuantityRequest()
-        }, 1500);
-    };
-
+         updateCartQuantity(id,newQuantity)
+        setUpdatingCart(false)
+    }
     const handleRemoveItem = (id) => {
         // still didnt confirm
         setSelectedCartItemId(id)
         setDisplayPopup(true);
+        
     };
 
     const RemoveItem = async (id) => {
         try {
-            const response = await DeleteCartItem(id)
+            // const response = await DeleteCartItem(id)
+            removeFromCart(selectedCartItemId)
             setSelectedCartItemId(null)
-            setCartItems((prevItems) => prevItems.filter((item) => item.id !== id));
-            console.log(response.data)
+
+            // console.log(response.data)
         } catch (e) {
             console.error(e)
         } finally {
@@ -92,44 +47,30 @@ const CartPage = () => {
     }
 
     const getTotalPrice = () => {
-        return cartItems.reduce(
-            (total, item) => total + (item.product_sku.price * item.quantity),
+        return cartContents.reduce(
+            (total, item) => total + (item.price * item.quantity),
             0,
         )
     };
 
-    useEffect(() => {
-        getCartData()
-    }, [])
 
-    useEffect(() => {
-        console.log(selectedCartItemId)
-    }, [selectedCartItemId])
+
 
     useEffect(() => {
         if (!displayPopup) {
             setSelectedCartItemId(null)
         } else if (!selectedCartItemId) {
             //this means that it was deleted
-            getCartData()
+            // getCartData()
         }
     }, [displayPopup])
 
     const navigate = useNavigate()
 
     function handleCheckout() {
-        sendUpdateQuantityRequest()
         navigate()
     }
 
-    const handleBlur = (id, newQuantity) => {
-        if (updateTimer.current) {
-            clearTimeout(updateTimer.current)
-        }
-
-        sendUpdateQuantityRequest(id, newQuantity)
-
-    };
     if (!Error) {
         return (
             <div className={"cart-container"}>
@@ -138,12 +79,12 @@ const CartPage = () => {
                 <hr/>
                 <br/>
 
-                {!cartItems || cartItems.length === 0 ? (
+                {!cartContents || cartContents.length === 0 ? (
                     <p>Your cart is empty.</p>
                 ) : (
                     <div>
 
-                        {cartItems.map((item) => {
+                        {cartContents.map((item) => {
                             return (
                                 <div key={item.id} className={'cart-item'}>
                                     {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
@@ -159,16 +100,16 @@ const CartPage = () => {
 
                                     </Popup>}
                                     <div className={"cart-item-image-container"}>
-                                        <img src={"http://127.0.0.1:8000" + item.product_sku.associated_image?.image}
-                                             alt={item.product_sku.associated_image?.alt || "No image"}
+                                        <img src={item.src}
+                                             alt={item.alt || "No image"}
                                              className={"cart-item-image"}
 
                                         />
                                     </div>
                                     <div style={{flexDirection: "column"}}>
-                                        <h2>{item.product_sku.product.name}</h2>
-                                        <p>Price: ${item.product_sku.price}</p>
-                                        <p>Total: ${(item.product_sku.price * item.quantity)}</p>
+                                        <h2>{item.name}</h2>
+                                        <p>Price: ${item.price}</p>
+                                        <p>Total: ${(item.price * item.quantity)}</p>
                                     </div>
 
                                     <label>
@@ -177,9 +118,8 @@ const CartPage = () => {
                                             className={"cart-number-input"}
                                             type="number"
                                             min="1"
-                                            max={item.product_sku.quantity}
+                                            max={item.inventory}
                                             value={item.quantity}
-                                            onBlur={(e) => handleBlur(item.id, parseInt(e.target.value))}
                                             onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
                                             onScroll={event => event.preventDefault()}
                                         />
