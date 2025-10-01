@@ -32,7 +32,6 @@ const Shop = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [selectedProduct, setSelectedProduct] = useState(null)
     const [featuredProducts, setFeaturedProducts] = useState([])
 
     const {addToCart} = useCart()
@@ -62,12 +61,8 @@ const Shop = () => {
     const handleFilterChange = (filter) => {
         console.log(filter);
     };
-    const handleProductClick = (product) => {
-        setSelectedProduct(product)
-    }
-    const onClose = () => {
-        setSelectedProduct(null)
-    }
+
+
 
     const getPageContent = () => {
         if (!loading) {
@@ -121,8 +116,7 @@ const Shop = () => {
             <div className="products-grid">
                 {featuredProducts.map((product) => {
                         return (
-                            <ProductCard key={product.id} product={product} onClick={() => handleProductClick(product)
-                            }></ProductCard>
+                            <ProductCard key={product.id} product={product}></ProductCard>
                         )
 
                     }
