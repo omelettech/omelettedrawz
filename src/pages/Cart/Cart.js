@@ -83,22 +83,24 @@ const CartPage = () => {
                     <p>Your cart is empty.</p>
                 ) : (
                     <div>
+                        {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
+                            <p>Are you sure</p>
+                            <button className={"btn secondary"}
+                                    onClick={() => RemoveItem(selectedCartItemId)}>
+                                Yes
+                            </button>
+                            <button className={"btn primary"} onClick={() => {
+                                setDisplayPopup(false)
+                            }}>No
+                            </button>
+
+                        </Popup>}
+
 
                         {cartContents.map((item) => {
                             return (
                                 <div key={item.id} className={'cart-item'}>
-                                    {displayPopup && <Popup onClickBG={() => setDisplayPopup(false)}>
-                                        <p>Are you sure</p>
-                                        <button className={"btn secondary"}
-                                                onClick={() => RemoveItem(selectedCartItemId)}>
-                                            Yes
-                                        </button>
-                                        <button className={"btn primary"} onClick={() => {
-                                            setDisplayPopup(false)
-                                        }}>No
-                                        </button>
 
-                                    </Popup>}
                                     <div className={"cart-item-image-container"}>
                                         <img src={item.src}
                                              alt={item.alt || "No image"}
