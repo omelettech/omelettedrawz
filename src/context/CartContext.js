@@ -4,11 +4,13 @@ export const CartContext = createContext()
 
 
 export const CartProvider = ({children}) => {
-        const [cartContents, setCartContents] = useState([])
+        const [cartContents, setCartContents] = useState(JSON.parse(localStorage.getItem("cart")) || [])
 
-        useEffect(()=>{
-            console.log(cartContents)
-        },[cartContents])
+        useEffect(() => {
+            console.log("saving cart contents to localstorage")
+            localStorage.setItem("cart", JSON.stringify(cartContents))
+        }, [cartContents])
+
         const addToCart = (item) => {
             if (!cartContents) {
                 setCartContents([{item, quantity: 1}])
@@ -39,7 +41,7 @@ export const CartProvider = ({children}) => {
             setCartContents([]);
         };
         const updateCartQuantity = (id, newQty) => {
-            console.log("updating",id,newQty)
+            console.log("updating", id, newQty)
             setCartContents((prevCart) => {
                 return prevCart.map(item =>
                     //loops through the list to find the item, then updates the quantity
