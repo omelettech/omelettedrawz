@@ -77,7 +77,7 @@ const Shop = () => {
                         {filteredProducts.map((product) => {
                                 return (
 
-                                    <ProductCard product={product} handleAddToCart={addToCart}>
+                                    <ProductCard key={product.id} product={product} handleAddToCart={addToCart}>
 
 
                                     </ProductCard>
