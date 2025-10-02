@@ -68,7 +68,7 @@ const CartPage = () => {
     const navigate = useNavigate()
 
     function handleCheckout() {
-        navigate()
+        navigate("/checkout")
     }
 
     if (!Error) {
