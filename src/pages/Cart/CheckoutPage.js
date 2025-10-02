@@ -1,18 +1,53 @@
 import React, {useState} from 'react';
 import './CheckoutPage.css';
+import {useCart} from "../../context/CartContext";
 
 export const Checkout = () => {
     const [checkoutOption, setCheckoutOption] = useState('guest');
+    const {cartContents} = useCart()
 
     const handleCreateAccount = () => {
         // TODO: Implement account creation logic
         console.log('Creating account with cart...');
     };
 
-    const handleGuestCheckout = () => {
-        // TODO: Implement Stripe payment logic
-        console.log('Processing guest payment with Stripe...');
+    const handleGuestCheckout = async (cartItems) => {
+        try {
+            console.log('Processing guest payment with Stripe...');
+
+            // Your Cloud Function URL
+            const functionUrl = process.env.REACT_APP_FIREBASE_CREATE_CHECKOUT_URL;
+
+            // Call your Cloud Function
+            const response = await fetch(functionUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    cartItems: cartItems,
+                    successUrl: window.location.origin + '/success',
+                    cancelUrl: window.location.origin + '/cancel',
+                }),
+            });
+
+            const data = await response.json();
+
+            console.log(data)
+
+            if (data.url) {
+                // Redirect to Stripe Checkout
+                window.location.href = data.url;
+            } else {
+                throw new Error('No checkout URL returned');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to initiate payment. Please try again.');
+        }
     };
+
 
     return (
         <div className="cart-container">
@@ -51,7 +86,7 @@ export const Checkout = () => {
                     <p className="checkout-description">
                         Complete your purchase as a guest. Payment will be processed securely through Stripe.
                     </p>
-                    <button onClick={handleGuestCheckout} className="checkout-submit-btn">
+                    <button onClick={()=>handleGuestCheckout(cartContents)} className="checkout-submit-btn">
                         Proceed to Payment
                     </button>
                 </div>

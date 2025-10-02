@@ -52,7 +52,7 @@ exports.createCheckoutSession = onRequest(
                         product_data: {
                             name: item.name,
                             description: item.description || '',
-                            images: item.image ? [item.image] : [],
+                            images: item.src ? [item.src] : [],
                         },
                         unit_amount: Math.round(item.price * 100),
                     },
